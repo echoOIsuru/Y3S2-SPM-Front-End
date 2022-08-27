@@ -1,12 +1,21 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter,Routes,Route} from 'react-router-dom';
 import './App.css';
-import Navigation from './Navigation/Navigation';
+
+import CreateAppointment from './Pages/patient/createAppointment';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navigation />
-    </BrowserRouter>
+
+
+           <Routes>
+
+                <Route path="/add" element={<CreateAppointment/>}/>
+
+          </Routes>
+
+
+</BrowserRouter>
   );
 }
 
