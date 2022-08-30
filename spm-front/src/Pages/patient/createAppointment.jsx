@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -12,8 +12,10 @@ export default function CreateAppointment() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState(""); 
   const [status, setStatus] = useState("");
+  const [AID, setAID] = useState("");
+  const[ doctorName,setDoctorName]=useState("");
 
-  function sendData(e) {
+  function SendData(e) {
     e.preventDefault();
     if (window.confirm('Do you whant create Appointment?')) {
 
@@ -21,13 +23,18 @@ export default function CreateAppointment() {
 
         patientNIC,
         patientName,
-        doctorID, 
+        doctorID:"2", 
         date, 
         time,
         status:"pendding",
-
+        AID:"1",
+        doctorName:"kamal",
       }
-      axios.post("//localhost:8090/api/v1/appointment/", newAppointment).then((res) => {
+
+
+
+
+      axios.post("http://localhost:8090/api/v1/appointment/", newAppointment).then((res) => {
         alert("APPOINTMENT Request SUCCESSFULL")
       }).catch((err) => {
         alert("err")
@@ -39,7 +46,7 @@ export default function CreateAppointment() {
 
     <div>
 
-<br />   <br /> 
+  <br />   <br /> 
     <br />   <br /> 
 <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
@@ -67,7 +74,7 @@ export default function CreateAppointment() {
 </nav>
     <div className="p-3 mb-2 bg-dark text-white">
       <h1><center>CREATE APPOINTMENT</center></h1>
-      <form onSubmit={sendData}>
+      <form onSubmit={SendData}>
 
 
       <div className="text-warning" >
@@ -97,7 +104,7 @@ export default function CreateAppointment() {
           <label for="nic">Doctor Name</label>
           <input type="text" className="form-control" id="nic" placeholder="Doctor Name"
             onChange={(e) => {
-              setDoctorID(e.target.value);
+              setDoctorName(e.target.value);
             }} required={true}/>
 
         </div>
