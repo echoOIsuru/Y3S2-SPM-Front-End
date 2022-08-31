@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { useNavigate, useParams } from 'react-router-dom'
-
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import { Container } from "react-bootstrap";
 export default function CreateAppointment() {
-
 
   const [patientNIC, setPatientNIC] = useState("");
   const [patientName,setPatientName] = useState("");
@@ -14,6 +13,21 @@ export default function CreateAppointment() {
   const [status, setStatus] = useState("");
   const [AID, setAID] = useState("");
   const[ doctorName,setDoctorName]=useState("");
+  const[g,setG]=useState([]);
+  useEffect( ()=>{
+    const getdoc= async ()=>{
+      const req= await fetch("http://localhost:8090/api/v1/appointment");
+      const getres= await req.json();
+      console.log(getres);
+      setG(await getres);
+ 
+    }
+    getdoc();
+ 
+   },[]);
+
+
+
 
   function SendData(e) {
     e.preventDefault();
@@ -28,11 +42,11 @@ export default function CreateAppointment() {
         time,
         status:"pendding",
         AID:"1",
-        doctorName:"kamal",
+        doctorName,
+        g,
       }
 
-
-
+  
 
       axios.post("http://localhost:8090/api/v1/appointment/", newAppointment).then((res) => {
         alert("APPOINTMENT Request SUCCESSFULL")
@@ -99,7 +113,7 @@ export default function CreateAppointment() {
             required={true}/>
         </div>
 
-        <div className="text-success">
+        {/* <div className="text-success">
    
           <label for="nic">Doctor Name</label>
           <input type="text" className="form-control" id="nic" placeholder="Doctor Name"
@@ -107,12 +121,36 @@ export default function CreateAppointment() {
               setDoctorName(e.target.value);
             }} required={true}/>
 
-        </div>
+        </div> */}
+        {/* <div>
+        <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Dropdown Button
+      </Dropdown.Toggle>
 
-
+      <Dropdown.Menu>
+        <Dropdown.Item value="sss" href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+        </div> */}
+        <div>
+<label className="mb-2">doctor</label>
+                 <select name="doctorname" className="form-control" onChange={(e)=>{ setDoctorName(e.target.value);}}>
+                   <option>--Select doctor--</option>
+                   {
+                    g.map( (getcon)=>(
+                   <option key={getcon.doctorName} value={getcon.doctorName }> { getcon.doctorName}</option>
+                     ))
+                }
+                 
+                 </select>
+             
+                 </div>       
         <div className="text-danger">
           <label for="gender">Date</label>
-          <input type="text" className="form-control" id="gender" placeholder="Enter Apointment Date"
+          <input type="date" className="form-control" id="gender" placeholder="Enter Apointment Date"
             onChange={(e) => {
               setDate(e.target.value);
             }} required={true}/>
@@ -121,7 +159,7 @@ export default function CreateAppointment() {
 
         <div className="text-primary">
           <label for="email">Time</label>
-          <input type="text" className="form-control" id="email" placeholder="Enter Appointment Time"
+          <input type="time" className="form-control" id="email" placeholder="Enter Appointment Time"
             onChange={(e) => {
               setTime(e.target.value);
             }} required={true} />

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
 
 
+
 export default function EditStudent() {
     
 const {id}=useParams();
@@ -116,8 +117,7 @@ const {id}=useParams();
       </div>
 
   
-
-
+    
      
      <center>
       <a className="btn btn-warning" href={"/home"}>
