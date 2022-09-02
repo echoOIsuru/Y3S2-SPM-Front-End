@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Pagination from './Pagination';
 export default function Appointment(p) {
   const [appointment, setAppointment] = useState([]);
-
+  const [recordsPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [indexOfFirstItem, setindexOfFirstItem] = useState(0);
+  const [indexOfLastItem, setindexOfLastItem] = useState(3);
   function getAppointment() {
     axios.get("http://localhost:8090/api/v1/appointment/23449").then((res) => {
       console.log(res.data);
@@ -29,9 +32,41 @@ export default function Appointment(p) {
  
   return (
 
+    <div>
+
+  <br />   <br /> 
+    <br />   <br /> 
+<nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <div className="container-fluid">
+  
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav">
+     &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;
+        <li className="nav-item">
+          <a className="nav-link active" href="/">Home</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  
+        <li className="nav-item">
+          <a className="nav-link"  href="">APPOINTMENT DETAILS</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
+        <li className="nav-item">
+          <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
+        <li className="nav-item">
+          <a className="nav-link" href="">ABOUT US</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <div className="container">
-      <h1>Appointment Details</h1>
+
+
+
+      <center><h1>Appointment Details</h1></center>
       <br />
       <table className="table ">
         <thead className="table-dark">
@@ -75,9 +110,18 @@ export default function Appointment(p) {
 
         </tbody>
       </table>
+      <Pagination
+  itemsCount={appointment.length}
+  itemsPerPage={recordsPerPage}
+  currentPage={currentPage}
+  setCurrentPage={setCurrentPage}
+  setindexOfLastItem={setindexOfLastItem}
+  setindexOfFirstItem={setindexOfFirstItem}
+  alwaysShown={false}
+/>
     </div>
 
-
+    </div>
 
 
   )

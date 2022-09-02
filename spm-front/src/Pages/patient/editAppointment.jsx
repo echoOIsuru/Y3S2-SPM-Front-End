@@ -60,6 +60,13 @@ const {id}=useParams();
   }
 
   return (
+
+
+
+
+
+
+    
     <div className="p-3 mb-2 bg-dark text-white">
     <h1><center>Update APPOINTMENT</center></h1>
     <form onSubmit={SendData}>

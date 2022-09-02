@@ -62,7 +62,7 @@ export default function CreateAppointment() {
 
   <br />   <br /> 
     <br />   <br /> 
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
+<nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
   <div className="container-fluid">
   
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,15 +70,16 @@ export default function CreateAppointment() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
+     &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
           <a className="nav-link active" href="/">Home</a>
-        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  
         <li className="nav-item">
           <a className="nav-link"  href="">APPOINTMENT DETAILS</a>
-        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
           <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
-        </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+        </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
         <li className="nav-item">
           <a className="nav-link" href="">ABOUT US</a>
         </li>
@@ -86,12 +87,14 @@ export default function CreateAppointment() {
     </div>
   </div>
 </nav>
-    <div className="p-3 mb-2 bg-dark text-white">
+<div className="container">
+  
+    <div className="form-group">
       <h1><center>CREATE APPOINTMENT</center></h1>
       <form onSubmit={SendData}>
 
 
-      <div className="text-warning" >
+      <div className="" >
           <label for="name">Patient NIC</label>
           <input type="text" className="form-control"  id="name" placeholder="Enter Patient NIC"
             onChange={(e) => {
@@ -101,8 +104,8 @@ export default function CreateAppointment() {
         </div>
      
 
-        <div className="text-info">
-          <label for="age">patient Name</label>
+        <div className="">
+          <label for="age">Patient Name</label>
 
           <input type="text" className="form-control" id="age" placeholder="Enter Patient Name"
             onChange={(e) => {
@@ -136,7 +139,7 @@ export default function CreateAppointment() {
     </Dropdown>
         </div> */}
         <div>
-<label className="mb-2">doctor</label>
+<label className="">Doctor</label>
                  <select name="doctorname" className="form-control" onChange={(e)=>{ setDoctorName(e.target.value);}}>
                    <option>--Select doctor--</option>
                    {
@@ -147,8 +150,9 @@ export default function CreateAppointment() {
                  
                  </select>
              
-                 </div>       
-        <div className="text-danger">
+                 </div>  
+
+        <div className="">
           <label for="gender">Date</label>
           <input type="date" className="form-control" id="gender" placeholder="Enter Apointment Date"
             onChange={(e) => {
@@ -157,7 +161,7 @@ export default function CreateAppointment() {
 
         </div>
 
-        <div className="text-primary">
+        <div className="">
           <label for="email">Time</label>
           <input type="time" className="form-control" id="email" placeholder="Enter Appointment Time"
             onChange={(e) => {
@@ -169,10 +173,10 @@ export default function CreateAppointment() {
     
 
 
-       
+       <br/>
        <center>
-        <a className="btn btn-warning" href={"/home"}>
-                <i className="fas fa-edit"></i>&nbsp;cancel
+        <a className="btn btn-danger" href={"/home"}>
+                <i className="fas fa-edit"></i>&nbsp;Cancel
        </a>
        &nbsp;
        <button type="submit" className="btn btn-primary">Submit</button>
@@ -182,6 +186,7 @@ export default function CreateAppointment() {
 
     </div>
 
+    </div>
     </div>
   )
 
