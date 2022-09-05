@@ -24,7 +24,7 @@ export default function UpdateStock() {
 
     return (
         <div>
-            <br /><br /><br />
+            <br />
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -105,6 +105,7 @@ export default function UpdateStock() {
                     </div>
                 </div>
             </div>
+            <br />
         </div>
     )
 }

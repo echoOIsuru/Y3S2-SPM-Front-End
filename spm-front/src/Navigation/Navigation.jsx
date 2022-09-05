@@ -3,6 +3,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import AdminDashboard from '../Pages/UserManagement/AdminDashboard';
 
 import AddStock from '../Pages/PharmacyManagement/AddStock';
 import UpdateStock from '../Pages/PharmacyManagement/UpdateStock';
@@ -12,7 +13,7 @@ import PharmacyDashboard from '../Pages/PharmacyManagement/PharmacyDashboard';
 function Navigation() {
     return (
         <Routes>
-            <Route path='/' element={<div>Navigation</div>} />
+            <Route path='/' element={<AdminDashboard />} />
             <Route path='/test' element={<div>test</div>} />
 
             {/* pharmacy management routes */}

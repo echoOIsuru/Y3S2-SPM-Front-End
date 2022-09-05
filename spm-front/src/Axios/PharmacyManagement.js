@@ -1,0 +1,32 @@
+import axios from "axios";
+const URL = "http://localhost:8090/api/v1/";
+
+/**
+ * Add new medicine stock
+ */
+const addStock = (data) => {
+    return axios.post(URL + "pm_add_stock", data);
+}
+
+/**
+ * Retrieve Medicine Stocks Details
+ */
+const getStocks = () => {
+    return axios.get(URL + "pm_get_stocks");
+}
+
+/**
+ * Update Medicine Stock
+ */
+const updateStock = (id, data) => {
+    return axios.put(URL + "pm_update_stock/" + id, data);
+}
+
+/**
+ * Delete Medicine Stock
+ */
+const deleteStock = (id) => {
+    return axios.delete(URL + "pm_delete_stock/" + id);
+}
+
+export default {addStock, getStocks, updateStock, deleteStock};
