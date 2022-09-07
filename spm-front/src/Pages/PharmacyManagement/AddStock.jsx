@@ -9,10 +9,9 @@ export default function AddStock() {
     const [total_cost, setTotal] = useState();
     const [qty, setQty] = useState(0);
     const [price, setPrice] = useState(0);
-    const [flag, setFlag] = useState(false);
 
     const current = new Date();
-    const added_date = `${current.getDate()}/${current.getMonth()}/${current.getFullYear()}`;
+    const added_date = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`;
 
     const navigate = useNavigate();
 
@@ -34,16 +33,23 @@ export default function AddStock() {
 
     }
 
+    const cancel = () => {
+        navigate('/pharmacy/pharmacy_dashboard');
+    }
+
     return (
         <div>
-            <br />
             <div className="container">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <span></span>
+                <h1 class="h3 mb-0 text-gray-800">ADD STOCK</h1>
+                <span></span>
+            </div>
+            <hr class="sidebar-divider" />
                 <div className="row">
-                    <div className="card col-md-6 offset-md-3 offset-md-3">
+                    <div className="card shadow col-md-6 offset-md-3 offset-md-3">
                         <br />
-                        <h1 className="text-center">ADD STOCK</h1>
                         <div className="card-body">
-                            <hr />
                             <form onSubmit={handleSubmit}>
                                 <div className='row'>
                                     <div className='col'>
@@ -70,7 +76,12 @@ export default function AddStock() {
 
                                         <div>
                                             <label htmlFor="">Expiration Date</label>
-                                            <input type="date" name="expire_date" value={inputs.expire_date} onChange={(e) => {setInputs(values => ({ ...values, "added_date": added_date})); setInputs(values => ({ ...values, "total_cost": qty*price})); setInputs(values => ({ ...values, [e.target.name]: e.target.value }))}} id="" className="form-control" placeholder='2022-09-30' required />
+                                            <input type="date" name="expire_date" value={inputs.expire_date} 
+                                            onChange={(e) => {
+                                                setInputs(values => ({ ...values, "added_date": added_date})); 
+                                                setInputs(values => ({ ...values, "total_cost": qty*price})); 
+                                                setInputs(values => ({ ...values, [e.target.name]: e.target.value }))}} 
+                                                className="form-control" placeholder='2022-09-30' required />
                                         </div>
                                         <br />
                                     </div>
@@ -97,7 +108,7 @@ export default function AddStock() {
                                 <div className="form-group">
                                     <div className='row'>
                                         <div className='col'>
-                                            <input type="button" value="Cancel" className="btn btn-secondary form-control" />
+                                            <input type="button" value="Cancel"  onClick={cancel} className="btn btn-secondary form-control" />
                                         </div>
                                         <div className='col'>
                                             <input type="submit" value="Save" className="btn btn-success form-control" />

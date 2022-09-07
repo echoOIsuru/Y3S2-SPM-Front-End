@@ -16,6 +16,13 @@ const getStocks = () => {
 }
 
 /**
+ * Retrieve Medicine Stocks Details
+ */
+ const getStock = (id) => {
+    return axios.get(URL + "pm_get_stock/" + id);
+}
+
+/**
  * Update Medicine Stock
  */
 const updateStock = (id, data) => {
@@ -29,4 +36,4 @@ const deleteStock = (id) => {
     return axios.delete(URL + "pm_delete_stock/" + id);
 }
 
-export default {addStock, getStocks, updateStock, deleteStock};
+export default {addStock, getStocks, getStock, updateStock, deleteStock};
