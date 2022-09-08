@@ -41,8 +41,7 @@ export default function PharmacyDashboard() {
       },
     },
   };
-
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['Amoxicillin', 'Meloxicam', 'Gabapentin', 'Entyvio', 'Metoprolol', 'Clindamycin', 'Pantoprazole'];
 
   const data = {
     labels,
@@ -78,11 +77,11 @@ export default function PharmacyDashboard() {
    */
 
   const data1 = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['March', 'April', 'May', 'June', 'July', 'August'],
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [14515, 13780, 18820, 9870, 20250, 17550],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -123,7 +122,7 @@ export default function PharmacyDashboard() {
               <div className='card-header bg-success'></div>
               <div className="card-body">
                 <div className='card-title text-success text-center font-weight-bold'>TOTAL PRESCRIPTIONS</div>
-                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>21 324</h5>
+                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>24</h5>
               </div>
             </div>
           </div>
@@ -133,7 +132,7 @@ export default function PharmacyDashboard() {
               <div className='card-header bg-warning'></div>
               <div className="card-body">
                 <div className='card-title text-warning text-center font-weight-bold'>TOTAL INCOME</div>
-                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>Rs. 45678 /=</h5>
+                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>Rs. 14 578 /=</h5>
               </div>
             </div>
           </div>
@@ -143,7 +142,7 @@ export default function PharmacyDashboard() {
               <div className='card-header bg-info'></div>
               <div className="card-body">
                 <div className='card-title text-info text-center font-weight-bold'>TOTAL PROFIT</div>
-                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>Rs. 24321 /=</h5>
+                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>Rs. 4 321 /=</h5>
               </div>
             </div>
           </div>

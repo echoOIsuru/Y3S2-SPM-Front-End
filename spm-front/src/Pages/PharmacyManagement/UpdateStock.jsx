@@ -52,6 +52,14 @@ export default function UpdateStock() {
         navigate('/pharmacy/view_stocks');
     }
 
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate() + 1).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
+
     return (
         <div>
             <div className="container">
@@ -104,7 +112,7 @@ export default function UpdateStock() {
 
                                         <div>
                                             <label htmlFor="">Expiration Date</label>
-                                            <input type="date" name="expire_date" value={inputs.expire_date}
+                                            <input type="date" name="expire_date" min={disablePastDate()} value={inputs.expire_date}
                                                 onChange={(e) => {
 
                                                     setInputs(values => ({ ...values, [e.target.name]: e.target.value }))

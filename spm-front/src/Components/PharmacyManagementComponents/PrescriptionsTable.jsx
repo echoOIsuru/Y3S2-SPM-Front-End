@@ -8,16 +8,18 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit/dist/rea
 export default function PrescriptionsTable() {
 
     const products = [
-        { id: 1, name: 'George', animal: 'Monkey' },
-        { id: 2, name: 'Jeffrey', animal: 'Giraffe' },
-        { id: 3, name: 'Alice', animal: 'Giraffe' },
-        { id: 4, name: 'Alice', animal: 'Tiger' }
+        { id: '123', firstName: 'Jeffrey', lastName: 'George', added_date: '2022-07-09', total_bill: '1750' },
+        { id: '063', firstName: 'Alvis', lastName: 'Daen', added_date: '2022-03-17', total_bill: '1200' },
+        { id: '100', firstName: 'Lissa', lastName: 'Shipsey', added_date: '2022-05-10', total_bill: '1600' },
+        { id: '111', firstName: 'Marcos', lastName: 'Anguiano', added_date: '2022-04-21', total_bill: '2150' },
     ];
 
     const columns = [
-        { dataField: 'id', text: 'Id', sort: true },
-        { dataField: 'name', text: 'Name', sort: true },
-        { dataField: 'animal', text: 'Animal', sort: true }
+        { dataField: 'id', text: 'User ID', sort: true },
+        { dataField: 'firstName', text: 'First Name', sort: true },
+        { dataField: 'lastName', text: 'Last Name', sort: true },
+        { dataField: 'added_date', text: 'Date', sort: true },
+        { dataField: 'total_bill', text: 'Total Bill', sort: true }
     ];
 
     const defaultSorted = [{
