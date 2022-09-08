@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from './Pagination';
+import img1 from './image/1.png';
+import img2 from './image/2.jpg';
 export default function Appointment(p) {
   const [appointment, setAppointment] = useState([]);
   const [recordsPerPage] = useState(3);
@@ -33,8 +35,15 @@ export default function Appointment(p) {
   return (
 
     <div>
+ <div>
+        <img src={img1} alt=""   style={{ width: '200px', height: '100px', marginLeft: '0px' }}/>
+        <img src={img2} alt=""   style={{ width: '100px', height: '100px', float: 'right', marginRight: '90px' }}/>
+        <br/>
+        <a className="btn btn-warning"style={{  width: '75px', height: '35px',float: 'right', marginRight: '100px' }} href={"/add/"}>
+                <i className="fas fa-edit"></i>Logout
 
-  <br />   <br /> 
+              </a>
+      </div>
     <br />   <br /> 
 <nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
   <div className="container-fluid">

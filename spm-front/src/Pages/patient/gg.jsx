@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {useCallback ,useEffect,useState } from 'react';
-
+import img1 from './image/1.png';
+import img2 from './image/2.jpg';
+import Pagination from './Pagination';
 export default  function SearchReacord(){
 const [students, setstudents] = useState([])
 const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +16,7 @@ const fetchData = useCallback(async () => {
   try {
       const studentsData = await axios({
           method: 'GET',
-          url: `http://localhost:8090/api/v1/appointment`
+          url: `http://localhost:8090/api/v1/d`
       })
       setstudents(studentsData.data)
       setretrievedData(studentsData.data)
@@ -48,32 +50,73 @@ useEffect(() => {
 
 
   return (
- 
+
+    <div>
+
+      <div>
+        <img src={img1} alt=""   style={{ width: '200px', height: '100px', marginLeft: '0px' }}/>
+        <img src={img2} alt=""   style={{ width: '100px', height: '100px', float: 'right', marginRight: '90px' }}/>
+        <br/>
+        <a className="btn btn-warning"style={{  width: '75px', height: '35px',float: 'right', marginRight: '100px' }} href={"/add/"}>
+                <i className="fas fa-edit"></i>Logout
+
+              </a>
+      </div>
+<div> </div>
+              <br/>     <br/>
+<nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <div className="container-fluid">
+  
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav">
+     &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;
+        <li className="nav-item">
+          <a className="nav-link active" href="/">Home</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  
+        <li className="nav-item">
+          <a className="nav-link"  href="/appointments/">APPOINTMENT DETAILS</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
+        <li className="nav-item">
+          <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
+        </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
+        <li className="nav-item">
+          <a className="nav-link" href="">ABOUT US</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br />   <br />
+
+
+      <center><h1>Search Doctors</h1></center>
+
+      
     <div className="container">
                 <div class="fontuser" style={{ float: 'right' }}>
-                <br />   <br />   
-                    <input className='main-search' placeholder="Search" type="text" name="search" style={{ width: '400px', height: '40px', marginLeft: '100px' }} onChange={(e) => {
+               
+                    <input className='main-search' placeholder="Search" type="text" name="search" style={{ width: '200px', height: '30px', marginLeft: '50px' }} onChange={(e) => {
                         handleSearch(e);
                     }} />
                    
 
-                </div><br />
+                </div>
    
-
-                <br />   <br />   <br />
-
-      <center><h1>Appointment Details</h1></center>
-      <br />   <br />   <br />
+              
+      <br />   <br />  
       <table className="table ">
         <thead className="table-dark">
           <tr>
 
             {/* <th >ID</th> */}
             <th>Doctor </th>
-            <th>Appointment ID</th>
-            <th>Appointment Date</th>
+            <th>specialist</th>
+            {/* <th>Appointment Date</th>
             <th>Appointment Time</th>
-            <th>status</th>
+            <th>status</th> */}
             <th>Acction</th>
            
           </tr>
@@ -85,14 +128,14 @@ useEffect(() => {
           {students.map((val) =>
             <tr key={val._id}>
           
-              <td>{val.doctorName}</td>
-              <td>{val.AID}</td> 
-              <td>{val.date}</td> 
+              <td>{val.doctor}</td>
+              <td>{val.s}</td> 
+              {/* <td>{val.date}</td> 
               <td>{val.time}</td> 
-              <td>{val.status}</td> 
+              <td>{val.status}</td>  */}
              
-              <td><a className="btn btn-warning" href={"/edit/" + val._id}>
-                <i className="fas fa-edit"></i>&nbsp;Edit
+              <td><a className="btn btn-warning" href={"/add/"}>
+                <i className="fas fa-edit"></i>&nbsp;Channel
 
               </a>
                 &nbsp;
@@ -103,8 +146,19 @@ useEffect(() => {
 
         </tbody>
       </table>
-    </div>
 
+
+      <Pagination
+  itemsCount={students.length}
+  itemsPerPage={recordsPerPage}
+  currentPage={currentPage}
+  setCurrentPage={setCurrentPage}
+  setindexOfLastItem={setindexOfLastItem}
+  setindexOfFirstItem={setindexOfFirstItem}
+  alwaysShown={false}
+/>
+    </div>
+    </div>
 
 
 

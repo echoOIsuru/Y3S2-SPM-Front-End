@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
+import img1 from './image/1.png';
+import img2 from './image/2.jpg';
 import { useNavigate, useParams } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Container } from "react-bootstrap";
@@ -16,7 +18,7 @@ export default function CreateAppointment() {
   const[g,setG]=useState([]);
   useEffect( ()=>{
     const getdoc= async ()=>{
-      const req= await fetch("http://localhost:8090/api/v1/appointment");
+      const req= await fetch("http://localhost:8090/api/v1/d");
       const getres= await req.json();
       console.log(getres);
       setG(await getres);
@@ -40,7 +42,7 @@ export default function CreateAppointment() {
         doctorID:"2", 
         date, 
         time,
-        status:"pendding",
+        status:"Pending",
         AID:"1",
         doctorName,
         g,
@@ -59,8 +61,15 @@ export default function CreateAppointment() {
   return (
 
     <div>
+ <div>
+        <img src={img1} alt=""   style={{ width: '200px', height: '100px', marginLeft: '0px' }}/>
+        <img src={img2} alt=""   style={{ width: '100px', height: '100px', float: 'right', marginRight: '90px' }}/>
+        <br/>
+        <a className="btn btn-warning"style={{  width: '75px', height: '35px',float: 'right', marginRight: '100px' }} href={"/add/"}>
+                <i className="fas fa-edit"></i>Logout
 
-  <br />   <br /> 
+              </a>
+      </div>
     <br />   <br /> 
 <nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
   <div className="container-fluid">
@@ -75,7 +84,7 @@ export default function CreateAppointment() {
           <a className="nav-link active" href="/">Home</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  
         <li className="nav-item">
-          <a className="nav-link"  href="">APPOINTMENT DETAILS</a>
+          <a className="nav-link"  href="/appointments/">APPOINTMENT DETAILS</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
           <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
@@ -144,7 +153,7 @@ export default function CreateAppointment() {
                    <option>--Select doctor--</option>
                    {
                     g.map( (getcon)=>(
-                   <option key={getcon.doctorName} value={getcon.doctorName }> { getcon.doctorName}</option>
+                   <option key={getcon.doctor} value={getcon.doctor }> { getcon.doctor}</option>
                      ))
                 }
                  
