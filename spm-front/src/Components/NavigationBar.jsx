@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavigationComponetnt from './AdminNavigationComponetnt';
+import PharmacyNavigationComponetnt from './PharmacyNavigationComponent';
 
 function NavigationBar() {
     let [userType, setUserType] = useState();
