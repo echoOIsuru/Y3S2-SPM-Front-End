@@ -14,12 +14,23 @@ export default function PrescriptionsTable() {
         { id: '111', firstName: 'Marcos', lastName: 'Anguiano', added_date: '2022-04-21', total_bill: '2150' },
     ];
 
+    const GetActionFormat = (cell, row) => {
+        return (
+            <div>
+                <button type="button" className="btn btn-outline-primary btn-sm ts-buttom" size="sm" >
+                    Details
+                </button>
+            </div>
+        );
+    }
+
     const columns = [
         { dataField: 'id', text: 'User ID', sort: true },
         { dataField: 'firstName', text: 'First Name', sort: true },
         { dataField: 'lastName', text: 'Last Name', sort: true },
         { dataField: 'added_date', text: 'Date', sort: true },
-        { dataField: 'total_bill', text: 'Total Bill', sort: true }
+        { dataField: 'total_bill', text: 'Total Bill', sort: true },
+        { dataField: 'action', text: 'Action',  formatter: GetActionFormat }
     ];
 
     const defaultSorted = [{
