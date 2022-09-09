@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavigationComponetnt from './AdminNavigationComponetnt';
+import PharmacyNavigationComponetnt from './PharmacyNavigationComponent';
 
 function NavigationBar() {
     let [userType, setUserType] = useState();
@@ -31,7 +32,7 @@ function NavigationBar() {
                         <span>Dashboard</span></a>
                 </li> */}
 
-                {userType == 'A' && <AdminNavigationComponetnt />}
+                <PharmacyNavigationComponetnt/>
 
 
                 <hr class="sidebar-divider d-none d-md-block" />
