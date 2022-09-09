@@ -1,4 +1,5 @@
 
+import { AssignmentTurnedInSharp, GroupOutlined, GroupTwoTone, GroupWork } from '@mui/icons-material';
 import React from 'react'
 import {
     AreaChart,
@@ -6,7 +7,7 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
-    Tooltip
+    Tooltip, Legend
 } from "recharts";
 
 import { PieChart, Pie, Cell } from "recharts";
@@ -14,77 +15,93 @@ import Table from '../../Components/UserManagementComponents/Table';
 
 const data = [
     {
-        name: "Page A",
-        uv: 4000,
-        pv: 2400,
-        amt: 2400
+        name: "February",
+        Anesthesiology: 4,
+        Dermatology: 2,
+        Family_medicine: 2
     },
     {
-        name: "Page B",
-        uv: 3000,
-        pv: 1398,
-        amt: 2210
+        name: "March",
+        Anesthesiology: 3,
+        Dermatology: 9,
+        Family_medicine: 2
     },
     {
-        name: "Page C",
-        uv: 2000,
-        pv: 9800,
-        amt: 2290
+        name: "April",
+        Anesthesiology: 2,
+        Dermatology: 9,
+        Family_medicine: 2
     },
     {
-        name: "Page D",
-        uv: 2780,
-        pv: 3908,
-        amt: 2000
+        name: "May",
+        Anesthesiology: 2,
+        Dermatology: 3,
+        Family_medicine: 2
     },
     {
-        name: "Page E",
-        uv: 1890,
-        pv: 4800,
-        amt: 2181
+        name: "June",
+        Anesthesiology: 1,
+        Dermatology: 4,
+        Family_medicine: 2
     },
     {
-        name: "Page F",
-        uv: 2390,
-        pv: 3800,
-        amt: 2500
+        name: "July",
+        Anesthesiology: 2,
+        Dermatology: 3,
+        Family_medicine: 2
     },
     {
-        name: "Page G",
-        uv: 3490,
-        pv: 4300,
-        amt: 2100
+        name: "August",
+        Anesthesiology: 3,
+        Dermatology: 4,
+        Family_medicine: 2
     }
 ];
 
-const data2 = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 }
+const pieData = [
+    {
+        name: "Patients",
+        value: 55
+    },
+    {
+        name: "Doctors",
+        value: 25
+    },
+    {
+        name: "Admin",
+        value: 15
+    },
+    {
+        name: "Pharmacists",
+        value: 5
+    },
+
 ];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#FF8042", "#AF19FF"];
 
 const RADIAN = Math.PI / 180;
 
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
 
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
-        <text
-            x={x}
-            y={y}
-            fill="black"
-            textAnchor={x > cx ? "start" : "end"}
-            dominantBaseline="central"
-        >
-            {`${(percent * 100).toFixed(0)}%`}
-        </text>
-    )
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div
+                className="custom-tooltip"
+                style={{
+                    backgroundColor: "#ffff",
+                    padding: "5px",
+                    border: "1px solid #cccc"
+                }}
+            >
+                <label>{`${payload[0].name} : ${payload[0].value}%`}</label>
+            </div>
+        )
+
+    }
+    return null
 }
+
 
 function AdminDashboard() {
 
@@ -92,11 +109,11 @@ function AdminDashboard() {
         <div className='container'>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <span></span>
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 class="h3 mb-0 text-gray-800">DASHBOARD</h1>
                 <span></span>
             </div>
             <hr class="sidebar-divider" />
-            <div class="row">
+            {/* <div class="row">
 
 
                 <div class="col-xl-4 col-md-6 mb-4">
@@ -105,11 +122,11 @@ function AdminDashboard() {
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Monthly)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                        TOTAL USERS</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    <GroupOutlined />
                                 </div>
                             </div>
                         </div>
@@ -123,11 +140,11 @@ function AdminDashboard() {
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (Annual)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        MONTHLY ACTIVE USERS</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    <GroupWork />
                                 </div>
                             </div>
                         </div>
@@ -140,18 +157,54 @@ function AdminDashboard() {
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (Annual)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        TOTAL ADMINS</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    <AssignmentTurnedInSharp />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> */}
+
+            <div className="row">
+
+                <div className='col mx-auto'>
+                    <div className="card shadow">
+                        <div className='card-header bg-success'></div>
+                        <div className="card-body">
+                            <div className='card-title text-success text-center font-weight-bold'>TOTAL USERS</div>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>15</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='col mx-auto'>
+                    <div className="card shadow">
+                        <div className='card-header bg-warning'></div>
+                        <div className="card-body">
+                            <div className='card-title text-warning text-center font-weight-bold'>MONTHLY ACTIVE USERS</div>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>8</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='col mx-auto'>
+                    <div className="card shadow">
+                        <div className='card-header bg-info'></div>
+                        <div className="card-body">
+                            <div className='card-title text-info text-center font-weight-bold'>TOTAL ADMINS</div>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>3</h5>
                         </div>
                     </div>
                 </div>
 
             </div>
+            <br />
+            <br />
 
 
             <div class="row">
@@ -160,7 +213,7 @@ function AdminDashboard() {
                     <div class="card shadow mb-4">
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">DOCTORS OVERVIEW</h6>
                         </div>
                         <div class="card-body">
                             <div class="chart-area">
@@ -182,21 +235,21 @@ function AdminDashboard() {
                                     <Tooltip />
                                     <Area
                                         type="monotone"
-                                        dataKey="uv"
+                                        dataKey="Anesthesiology"
                                         stackId="1"
                                         stroke="#8884d8"
                                         fill="#8884d8"
                                     />
                                     <Area
                                         type="monotone"
-                                        dataKey="pv"
+                                        dataKey="Dermatology"
                                         stackId="1"
                                         stroke="#82ca9d"
                                         fill="#82ca9d"
                                     />
                                     <Area
                                         type="monotone"
-                                        dataKey="amt"
+                                        dataKey="Family_medicine"
                                         stackId="1"
                                         stroke="#ffc658"
                                         fill="#ffc658"
@@ -213,7 +266,7 @@ function AdminDashboard() {
                     <div class="card shadow mb-4">
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">USER TYPES</h6>
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -230,23 +283,27 @@ function AdminDashboard() {
                             </div>
                         </div>
                         <div class="card-body">
-                            <PieChart width={400} height={380} style={{ marginTop: "-59px" }}>
+                            <PieChart width={400} height={300}>
                                 <Pie
-                                    data={data2}
-                                    cx={200}
-                                    cy={200}
-                                    labelLine={false}
-                                    label={renderCustomizedLabel}
-                                    outerRadius={130}
-                                    fill="#8884d8"
+                                    data={pieData}
+                                    color="#000000"
                                     dataKey="value"
+                                    nameKey="name"
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={120}
+                                    fill="#8884d8"
                                 >
-                                    {data2.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    {pieData.map((entry, index) => (
+                                        <Cell
+                                            key={`cell-${index}`}
+                                            fill={COLORS[index % COLORS.length]}
+                                        />
                                     ))}
                                 </Pie>
+                                <Tooltip content={<CustomTooltip />} />
+                                <Legend />
                             </PieChart>
-
 
                         </div>
                     </div>
@@ -258,7 +315,7 @@ function AdminDashboard() {
                 <div class="card shadow mb-4">
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">User Overview</h6>
                     </div>
 
                     <Table />

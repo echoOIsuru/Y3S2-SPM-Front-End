@@ -5,7 +5,10 @@ function NavigationBar() {
     let [userType, setUserType] = useState();
 
     useEffect(() => {
-        setUserType("A")
+        let data = sessionStorage.getItem('userLoginStorage');
+        data = JSON.parse(data);
+
+        setUserType(data.userType)
     }, [])
 
 
@@ -31,7 +34,8 @@ function NavigationBar() {
                         <span>Dashboard</span></a>
                 </li> */}
 
-                {userType == 'A' && <AdminNavigationComponetnt />}
+                {userType == 'admin' && <AdminNavigationComponetnt />}
+                {userType == 'patient' && <>SDSDSDSD</>}
 
 
                 <hr class="sidebar-divider d-none d-md-block" />

@@ -1,3 +1,4 @@
+import { AddModerator, AnalyticsRounded, House, ManageAccounts, Settings } from '@mui/icons-material'
 import React from 'react'
 
 function AdminNavigationComponetnt() {
@@ -9,19 +10,17 @@ function AdminNavigationComponetnt() {
                 Main
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Dashboard</span>
+                <a class="nav-link collapsed" href="/dashboard">
+                    <House />
+                    <span>     Dashboard</span>
                 </a>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Reports</span>
+                <a class="nav-link collapsed" href="#">
+                    <AnalyticsRounded />
+                    <span>  Reports</span>
                 </a>
             </li>
 
@@ -31,25 +30,24 @@ function AdminNavigationComponetnt() {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Add User</span>
+                <a class="nav-link collapsed" href="#">
+                    <AddModerator />
+                    <span>  Add User</span>
                 </a>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>User Management</span></a>
+                <a class="nav-link" href="/user-management">
+                    <ManageAccounts />
+                    <span>  User Management</span></a>
             </li>
 
 
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Setting</span></a>
+                    <Settings />
+                    <span>  Setting</span></a>
             </li>
 
 
