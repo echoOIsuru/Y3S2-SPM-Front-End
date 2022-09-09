@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Button } from "react-bootstrap";
+import PharmacyManagement from '../../Axios/PharmacyManagement';
+import Select from 'react-select';
 
 const NewMedicines = ({ setOpen, Medications, setMedications }) => {
 
@@ -7,39 +9,44 @@ const NewMedicines = ({ setOpen, Medications, setMedications }) => {
     const [Quantity, setQunatity] = useState("");
     const [MedicinesList, setMedicinesList] = useState([]);
 
-    // const fetchData = useCallback(async () => {
-    //     try {
-    //         ServiceManagement.getAppointmentsByDocId().then(res => {
-    //             setMedicinesList(res.data)
-    //         })
-    //     } catch (error) {
-    //         alert(error);
-    //     }
-    // }, [])
+    useEffect(() => {
+        //Access medicines dynamically from the database and assigned to varaible
+        PharmacyManagement.getStocks()
+            .then(res => {
+                let medicines = res.data.map((data) => { return (data.medicine) })
+                let dataSet = [];
+                for (let i = 0; i < res.data.length; i++) {
+                    dataSet.push({
+                        value: medicines[i],
+                        label: medicines[i]
+                    });
 
-    // useEffect(() => {
-    //     fetchData()
-    // }, [fetchData])
+                }
+
+                setMedicinesList(dataSet)
+            })
+
+    }, [])
+
+    console.log('select', MedicinesList)
 
     const AddNewMedication = () => {
 
         if (Medications != '') {
-            setMedications(Medications+', ' + Medicines + '(' + Quantity + ')');
+            setMedications(Medications + ', ' + Medicines.value + '(' + Quantity + ')');
         }
-        else{
-            setMedications(Medicines + '(' + Quantity + ')');   
+        else {
+            setMedications(Medicines.value + '(' + Quantity + ')');
         }
         handleClose();
     }
 
     const handleClose = () => setOpen(false);
 
-    // let MedList = MedicinesList.length > 0
-    // && MedicinesList.map((item) => {
-    //     return (
-    //         // <option value={item.illness}>{item.illness}</option>
-    //     )
-    // });
+
+    const IllnessHandler = (selectedOption) => {
+        setMedicines(selectedOption);
+    }
 
     return (
         <div>
@@ -48,14 +55,11 @@ const NewMedicines = ({ setOpen, Medications, setMedications }) => {
             <Row>
                 <Col>
                     <label style={{ marginBottom: '10px' }}>Medicines:</label><br />
-                    <select style={{ width: '270px' }} type="text" className="form-select" value={Medicines} onChange={(e) => {
-                        setMedicines(e.target.value);
-                    }} required >
-                        <option value=""></option>
-                        <option value="Accepted">Aspirin</option>
-                        <option value="Canceled">Fludrocortisone</option>
-                        <option value="Pending">Advil</option>
-                    </select>
+                    <Select
+                        value={Medicines}
+                        onChange={IllnessHandler}
+                        options={MedicinesList}
+                    />
                 </Col>
 
             </Row>< br />< br />
@@ -65,7 +69,7 @@ const NewMedicines = ({ setOpen, Medications, setMedications }) => {
                     <label style={{ marginBottom: '10px' }}>Quantity: </label><br />
                     <input className="form-control" style={{ width: '270px' }} type="text" value={Quantity} onChange={(e) => {
                         setQunatity(e.target.value);
-                    }} required/>
+                    }} required />
                 </Col>
 
             </Row>< br />< br />

@@ -193,7 +193,7 @@ const ListMedicalHistory = () => {
 
                 <Row className="list-title">
                     <Col>
-                        <h5 style={{ marginTop: '10px', fontWeight: '500', fontSize: '17px' }}>Patient Name: {patientName}</h5>
+                        <h5 style={{ marginTop: '10px', fontWeight: '500', fontSize: '17px', marginLeft:'18px' }}>Patient Name: {patientName}</h5>
                     </Col>
                     <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <Link style={{ marginRight: '10px' }} className='btn btn-outline-primary' to={("/medication/create")}>Add New Record</Link>

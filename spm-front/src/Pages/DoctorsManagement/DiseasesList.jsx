@@ -1,39 +1,57 @@
 //diseases
 export const diseases = [
     {
-        "DISEASE": "Encephalopathy",
+        value: "Encephalopathy",
+        label: "Encephalopathy"
     },
     {
-        "DISEASE": "Meningitis",
+        value: "Meningitis",
+        label: "Meningitis"
     },
     {
-        "DISEASE": "Heart failure",
+        value: "Heart failure",
+        label: "Heart failure"
     },
     {
-        "DISEASE": "Deep venous thrombosis",
+        value: "Deep venous thrombosis",
+        label: "Deep venous thrombosis"
     },
     {
-        "DISEASE": "Arrhythmias",
+        value: "Arrhythmias",
+        label: "Arrhythmias"
     },
     {
-        "DISEASE": "Encephalitis",
+        value: "Encephalitis",
+        label: "Encephalitis"
     },
     {
-        "DISEASE": "Seizure",
+        value: "Seizure",
+        label: "Seizure"
     },
     {
-        "DISEASE": "Paraplegia",
+        value: "Paraplegia",
+        label: "Paraplegia"
     },
     {
-        "DISEASE": "Valvular disease",
+        value: "Valvular disease",        
+        label: "Valvular disease"
     },
     {
-        "DISEASE": "Shock",
+        value: "Shock",
+        label: "Shock"
     }, 
     {
-        "DISEASE": "Peripheral vascular disease",
+        value: "Peripheral vascular disease",
+        label: "Peripheral vascular disease"
     }, 
     {
-        "DISEASE": "Ischemic disease",
+        diseases: "Ischemic disease",
+        label: "Ischemic disease"
     },
 ];
+
+// export const diseases = [
+//     { jk: 'chocolate', label: 'Chocolate' },
+//     { jk: 'strawberry', label: 'Strawberry' },
+//     { jk: 'vanilla', label: 'Vanilla' },
+//   ];
