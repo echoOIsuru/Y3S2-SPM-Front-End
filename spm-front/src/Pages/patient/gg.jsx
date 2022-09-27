@@ -39,6 +39,10 @@ useEffect(() => {
 
   }
 
+  const SlicedAllocatedPanels = students.slice(indexOfFirstItem, indexOfLastItem);
+
+
+
   //search function
   const handleSearch = (e) => {
       const k = e.target.value.toLowerCase()
@@ -80,7 +84,7 @@ useEffect(() => {
           <a className="nav-link"  href="/appointments/">APPOINTMENT DETAILS</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
-          <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
+          <a className="nav-link" href="/report/">PATIENT CHANNELING REPORT</a>
         </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
         <li className="nav-item">
           <a className="nav-link" href="">ABOUT US</a>
@@ -113,7 +117,7 @@ useEffect(() => {
 
             {/* <th >ID</th> */}
             <th>Doctor </th>
-            <th>specialist</th>
+            <th>Specialist</th>
             {/* <th>Appointment Date</th>
             <th>Appointment Time</th>
             <th>status</th> */}
@@ -125,7 +129,7 @@ useEffect(() => {
         </thead>
 
         <tbody>
-          {students.map((val) =>
+          {SlicedAllocatedPanels.map((val) =>
             <tr key={val._id}>
           
               <td>{val.doctor}</td>

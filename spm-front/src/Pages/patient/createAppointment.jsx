@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Container } from "react-bootstrap";
 export default function CreateAppointment() {
-
+  const navigate = useNavigate();
   const [patientNIC, setPatientNIC] = useState("");
   const [patientName,setPatientName] = useState("");
   const [doctorID, setDoctorID] = useState("");
@@ -43,7 +43,7 @@ export default function CreateAppointment() {
         date, 
         time,
         status:"Pending",
-        AID:"1",
+        AID:"3",
         doctorName,
         g,
       }
@@ -52,6 +52,7 @@ export default function CreateAppointment() {
 
       axios.post("http://localhost:8090/api/v1/appointment/", newAppointment).then((res) => {
         alert("APPOINTMENT Request SUCCESSFULL")
+        navigate("/appointments/");
       }).catch((err) => {
         alert("err")
       })
@@ -87,7 +88,7 @@ export default function CreateAppointment() {
           <a className="nav-link"  href="/appointments/">APPOINTMENT DETAILS</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
-          <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
+          <a className="nav-link" href="/report/">PATIENT CHANNELING REPORT</a>
         </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
         <li className="nav-item">
           <a className="nav-link" href="">ABOUT US</a>
@@ -188,7 +189,7 @@ export default function CreateAppointment() {
                 <i className="fas fa-edit"></i>&nbsp;Cancel
        </a>
        &nbsp;
-       <button type="submit" className="btn btn-primary">Submit</button>
+       <button type="submit" className="btn btn-primary" >Submit</button>
       
        </center>
       </form>

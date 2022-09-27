@@ -30,7 +30,7 @@ export default function Appointment(p) {
     getAppointment();
   }, [])
 
-
+  const SlicedAllocatedPanels = appointment.slice(indexOfFirstItem, indexOfLastItem);
  
   return (
 
@@ -61,7 +61,7 @@ export default function Appointment(p) {
           <a className="nav-link"  href="">APPOINTMENT DETAILS</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
-          <a className="nav-link" href="">PATIENT CHANNELING REPORT</a>
+          <a className="nav-link" href="/report/">PATIENT CHANNELING REPORT</a>
         </li>  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    
         <li className="nav-item">
           <a className="nav-link" href="">ABOUT US</a>
@@ -86,7 +86,7 @@ export default function Appointment(p) {
             <th>Appointment ID</th>
             <th>Appointment Date</th>
             <th>Appointment Time</th>
-            <th>status</th>
+            <th>Status</th>
             <th>Acction</th>
            
           </tr>
@@ -95,7 +95,7 @@ export default function Appointment(p) {
         </thead>
 
         <tbody>
-          {appointment.map(val =>
+          {SlicedAllocatedPanels.map(val =>
             <tr key={val._id}>
 
               <td>{val. doctorName}</td>
