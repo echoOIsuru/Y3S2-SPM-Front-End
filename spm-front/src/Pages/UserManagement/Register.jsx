@@ -21,7 +21,7 @@ function Register() {
 
     const validPassword = () => {
         if (inputs.password !== inputs.repeatPassword) {
-            window.alert(`password and eepeate password mismatched!`)
+            window.alert(`password and repeate password mismatched!`)
             return true;
         }
 
@@ -78,15 +78,15 @@ function Register() {
                                     <br />
                                     <input type="text" class="form-control form-control-user" name="lastName"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Last Name" />
+                                        placeholder="Enter Last Name" required />
                                     <br />
                                     <input type="email" class="form-control form-control-user" name="email"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Email Address" />
+                                        placeholder="Enter Email Address" required />
                                     <br />
                                     <textarea style={{ borderRadius: "25px" }} class="form-control form-control-user" rows="4" cols="50" name="address"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Address" />
+                                        placeholder="Enter Address" required />
                                     <br />
 
                                     <select name="city" class="form-control" style={{ fontSize: " .8rem", borderRadius: "25px", padding: "0.2rem 1rem", height: "48px" }}
@@ -135,12 +135,14 @@ function Register() {
                                         pattern=".{6,}"
                                         title="Six or more characters"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Password" />
+                                        placeholder="Enter Password"
+                                        required />
 
                                     <br />
                                     <input type="password" class="form-control form-control-user" name="repeatPassword"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Repeate Password" />
+                                        placeholder="Enter Repeate Password"
+                                        required />
 
                                     <br />
 

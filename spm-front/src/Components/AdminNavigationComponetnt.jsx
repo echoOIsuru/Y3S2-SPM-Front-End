@@ -18,7 +18,7 @@ function AdminNavigationComponetnt() {
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/users-reports">
                     <AnalyticsRounded />
                     <span>  Reports</span>
                 </a>
@@ -30,7 +30,7 @@ function AdminNavigationComponetnt() {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/add-users">
                     <AddModerator />
                     <span>  Add User</span>
                 </a>
@@ -45,7 +45,7 @@ function AdminNavigationComponetnt() {
 
 
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="/settings">
                     <Settings />
                     <span>  Setting</span></a>
             </li>

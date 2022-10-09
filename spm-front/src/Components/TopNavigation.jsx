@@ -11,7 +11,7 @@ function TopNavigation() {
         let data = sessionStorage.getItem('userLoginStorage');
         data = JSON.parse(data);
         setUser(data)
-    })
+    }, [])
 
     const logout = (e) => {
         e.preventDefault()
@@ -29,12 +29,12 @@ function TopNavigation() {
 
 
                 <div class="dropdownUser">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{user.firstName}</span>
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><PersonRounded color="success" fontSize="large" /></span>
+                    <span class="mr-4 d-none d-lg-inline text-gray-600 small">{user.firstName}</span>
+                    <span class="mr-5 d-none d-lg-inline text-gray-600 small"><PersonRounded color="success" fontSize="large" /></span>
 
 
-                    <div class="dropdownUser-content">
-                        <button className='btn btn-light' style={{ width: "100%" }}>Profile</button>
+                    <div class="dropdownUser-content" >
+                        <a href='/profile' className='btn btn-light' style={{ width: "100%" }}>Profile</a>
                         <button className='btn btn-light' onClick={logout} style={{ width: "100%" }}>Logout</button>
                     </div>
                 </div>

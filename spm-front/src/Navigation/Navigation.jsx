@@ -14,6 +14,10 @@ import AddStock from '../Pages/PharmacyManagement/AddStock';
 import UpdateStock from '../Pages/PharmacyManagement/UpdateStock';
 import ViewStocks from '../Pages/PharmacyManagement/ViewStocks';
 import PharmacyDashboard from '../Pages/PharmacyManagement/PharmacyDashboard';
+import AddUser from '../Pages/UserManagement/AddUser';
+import UserProfile from '../Pages/UserManagement/UserProfile';
+import { Setting } from '../Pages/UserManagement/Setting';
+import UsersReport from '../Pages/UserManagement/UsersReport';
 
 function Navigation() {
     return (
@@ -23,6 +27,10 @@ function Navigation() {
             <Route element={<ProtectedRoute />}>
                 <Route path='/dashboard' element={<Container data={<AdminDashboard />} />} />
                 <Route path='/user-management' element={<Container data={<UserManagement />} />} />
+                <Route path='/add-users' element={<Container data={<AddUser />} />} />
+                <Route path='/profile' element={<Container data={<UserProfile />} />} />
+                <Route path='/settings' element={<Container data={<Setting />} />} />
+                <Route path='/users-reports' element={<Container data={<UsersReport />} />} />
                 {/* pharmacy management routes */}
                 <Route path='/pharmacy/add_stock' element={<Container data={<AddStock />} />}></Route>
                 <Route path='/pharmacy/update_stock' element={<Container data={<UpdateStock />} />}></Route>

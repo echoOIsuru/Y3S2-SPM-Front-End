@@ -14,4 +14,12 @@ const loginUser = (data) => {
     return axios.post(URL + "user_validate", data)
 }
 
-export default { addNewUser, getAllUsers, loginUser }
+const deleteUser = (id) => {
+    return axios.delete(URL + "user_um/" + id)
+}
+
+const updateUser = (id, data) => {
+    return axios.put(URL + "user_um/" + id, data)
+}
+
+export default { addNewUser, getAllUsers, loginUser, deleteUser, updateUser }
