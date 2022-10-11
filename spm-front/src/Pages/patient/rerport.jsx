@@ -25,6 +25,7 @@ export default function Report (p) {
     const[ma,setMa]=useState();
     const[accept,setAccept]=useState();
     const[reject,setReject]=useState();
+    const[pending,setPending]=useState();
     const[total,setTotal]=useState();
   const [appointment, setAppointment] = useState([]);
     ChartJS.register(
@@ -40,7 +41,11 @@ export default function Report (p) {
     /**
      * Bar chart
      */
-    
+     function print() {
+
+      window.print();
+  
+  }
       const options = {
         responsive: true,
         plugins: {
@@ -84,7 +89,6 @@ export default function Report (p) {
           },
         ],
       };
- 
 
   
       function getTotalAppointment() {
@@ -126,7 +130,7 @@ export default function Report (p) {
           setAppointment(res.data)
           var count = 0;
           for(let i=0; i<res.data.length; i++){
-            if(res.data[i].doctorName === 'Rejected' ) 
+            if(res.data[i].status === 'Rejected' ) 
             count++
            setReject(count) ;
            
@@ -135,6 +139,20 @@ export default function Report (p) {
       }
 
 
+      function getPendingAppointment() {
+        axios.get("http://localhost:8090/api/v1/appointment/23449").then((res) => {
+    
+          console.log(res.data);
+          setAppointment(res.data)
+          var count = 0;
+          for(let i=0; i<res.data.length; i++){
+            if(res.data[i].status === 'Pending' ) 
+            count++
+           setPending(count) ;
+           
+            }
+        })
+      }
 
 
 
@@ -220,9 +238,13 @@ export default function Report (p) {
     getTotalAppointment();
     getAcceptedAppointment();
     getRejectedAppointment();
+
+    getPendingAppointment()
   }, [])
   console.log('gg',ada);
   
+
+
 
   return (
 
@@ -307,7 +329,20 @@ export default function Report (p) {
 </div>
 </td>
 <br/>
-
+<td>
+<div className="container">
+<div className='col mx-auto'>
+  <div className="card shadow">
+    <div className='card-header bg-success'></div>
+    <div className="card-body">
+      <div className=''>PENDING APPOINTMENT</div>
+      <center> <h5 className=''> {pending}</h5></center>
+    </div>
+  </div>
+</div>
+</div>
+</td>
+<br/>
 </table>
 
 </center>
@@ -322,7 +357,12 @@ export default function Report (p) {
   </div>
   </div>
   </center>
+  <center>
+  <div className="combined_btn1">
+                <button className="btn btn-success" style={{ marginLeft: "40px", marginBottom: "10px", width: "300px" }} onClick={print}>Print</button>
+                </div>
 
+  </center>
   </div>
 
 
