@@ -88,6 +88,7 @@ const ManageMedications = () => {
                             navigate("/medicalDetails");
                         }
                     })
+                    navigate("/medicalDetails");
                 }
 
             }

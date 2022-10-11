@@ -32,7 +32,7 @@ const EditHealthStatus = () => {
                 cured_date: CuredDate
             }
             ServiceManagement.updatecuredPatient(id,HealthStatusData).then(res => {
-                alert("HealthStatus is Updated!!");
+                alert("Health Status is Updated!!");
                 navigate("/medicalDetails");
             })
 
