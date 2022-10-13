@@ -25,7 +25,10 @@ function Login() {
             } else {
                 console.log(res.data)
                 sessionStorage.setItem("userLoginStorage", JSON.stringify(res.data));
-                navigation('/dashboard')
+                if (res.data.userType == 'admin')
+                    navigation('/dashboard')
+                if (res.data.userType == 'pharmacist')
+                    navigation('/pharmacy/pharmacy_dashboard')
             }
         })
     }

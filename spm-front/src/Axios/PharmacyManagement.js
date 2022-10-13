@@ -36,4 +36,18 @@ const deleteStock = (id) => {
     return axios.delete(URL + "pm_delete_stock/" + id);
 }
 
-export default {addStock, getStocks, getStock, updateStock, deleteStock};
+/**
+ * Check medicine is available in the stock
+ */
+const checkMedicine = (data) => {
+    return axios.post(URL + "pm_check_medicine", data);
+}
+
+/**
+ *  Add prescription
+ */
+const addPrescription = (data) => {
+    return axios.post(URL + "pm_add_prescription", data);
+}
+
+export default {addStock, getStocks, getStock, updateStock, deleteStock, checkMedicine, addPrescription};
