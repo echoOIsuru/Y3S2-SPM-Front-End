@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import PasswordStrengthBar from "react-password-strength-bar";
+import { useNavigate } from 'react-router-dom';
+import UserManagement from '../../Axios/UserManagement';
 
 function Register() {
 
     const [inputs, setInputs] = useState();
     const [password, setPassword] = useState("");
-
+    const navigation = useNavigate();
 
     const handleOnChange = (event) => {
         const name = event.target.name;
@@ -16,9 +18,40 @@ function Register() {
         setInputs(values => ({ ...values, [name]: value }))
     }
 
+
+    const validPassword = () => {
+        if (inputs.password !== inputs.repeatPassword) {
+            window.alert(`password and repeate password mismatched!`)
+            return true;
+        }
+
+        return false
+    }
+
     const createUser = (e) => {
         e.preventDefault()
-        console.log(inputs)
+
+        let temp = {
+            firstName: inputs.firstName,
+            lastName: inputs.lastName,
+            email: inputs.email,
+            address: inputs.address,
+            city: inputs.city,
+            password: inputs.password,
+            userType: "patient",
+            specialization: "0"
+
+        }
+
+        if (!validPassword()) {
+
+            UserManagement.addNewUser(temp).then(res => {
+                console.log(res.data)
+                window.alert(`User ${temp.firstName} created successfully!`)
+                navigation('/')
+            })
+
+        }
     }
 
     return (
@@ -45,15 +78,15 @@ function Register() {
                                     <br />
                                     <input type="text" class="form-control form-control-user" name="lastName"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Last Name" />
+                                        placeholder="Enter Last Name" required />
                                     <br />
                                     <input type="email" class="form-control form-control-user" name="email"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Email Address" />
+                                        placeholder="Enter Email Address" required />
                                     <br />
                                     <textarea style={{ borderRadius: "25px" }} class="form-control form-control-user" rows="4" cols="50" name="address"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Address" />
+                                        placeholder="Enter Address" required />
                                     <br />
 
                                     <select name="city" class="form-control" style={{ fontSize: " .8rem", borderRadius: "25px", padding: "0.2rem 1rem", height: "48px" }}
@@ -86,23 +119,30 @@ function Register() {
                                     </select>
 
                                     <br />
-                                    <div style={{ marginLeft: "100px" }}>
-                                        {password != "" && <PasswordStrengthBar
-                                            minLength={6}
-                                            password={password}
-                                            style={{ width: 200, height: 30 }}
-                                        />}
+                                    <center>
 
-                                    </div>
+                                        <div>
+                                            {password != "" && <PasswordStrengthBar
+                                                minLength={6}
+                                                password={password}
+                                                style={{ width: 200, height: 30 }}
+                                            />}
+
+                                        </div>
+                                    </center>
 
                                     <input type="password" class="form-control form-control-user" name="password"
+                                        pattern=".{6,}"
+                                        title="Six or more characters"
                                         onChange={handleOnChange}
-                                        placeholder="Enter Password" />
+                                        placeholder="Enter Password"
+                                        required />
 
                                     <br />
                                     <input type="password" class="form-control form-control-user" name="repeatPassword"
                                         onChange={handleOnChange}
-                                        placeholder="Email Repeate Password" />
+                                        placeholder="Enter Repeate Password"
+                                        required />
 
                                     <br />
 
@@ -114,7 +154,7 @@ function Register() {
                                 <hr />
 
                                 <div class="text-center">
-                                    <a class="small" href="login.html">Already have an account? Login!</a>
+                                    <a class="small" href="/">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>
