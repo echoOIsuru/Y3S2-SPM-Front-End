@@ -22,4 +22,12 @@ const updateUser = (id, data) => {
     return axios.put(URL + "user_um/" + id, data)
 }
 
-export default { addNewUser, getAllUsers, loginUser, deleteUser, updateUser }
+const getUserByCount = () => {
+    return axios.get(URL + "users_type")
+}
+
+const getUserByDate = () => {
+    return axios.get(URL + "doctors_by_special")
+}
+
+export default { addNewUser, getAllUsers, loginUser, deleteUser, updateUser, getUserByCount, getUserByDate }
