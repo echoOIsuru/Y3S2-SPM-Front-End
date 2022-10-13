@@ -10,8 +10,11 @@ const UserManagement = () => {
                 <span></span>
             </div>
             <hr class="sidebar-divider" />
-            <div class="row">
-                <Table />
+            <div class="row justify-content-md-center">
+                <div className="col-10">
+                    <Table />
+                    <br />
+                </div>
 
             </div>
         </div>

@@ -70,10 +70,9 @@ export default function UserProfile() {
             <hr class="sidebar-divider" />
             <div class="row">
                 <div class="row justify-content-md-center">
-                    <div className="col-10" style={{ backgroundColor: "white", padding: "20px", marginBottom: "20px" }}>
+                    <div className="col-9" style={{ backgroundColor: "white", padding: "20px", marginBottom: "20px" }}>
                         <form onSubmit={updateUser} class="" >
-                            <div className="row">
-
+                            <div className="row justify-content-md-center">
                                 <div className="col-6">
                                     <input type="text" class="form-control " name="firstName" value={inputs.firstName}
                                         onChange={handleOnChange}
@@ -137,7 +136,6 @@ export default function UserProfile() {
 
                                 <div className="col-6">
                                     <div class="profile-pic-wrapper" style={{ marginTop: "200px" }}>
-
                                         <input type="file" id="myfile" name="myfile" style={{ opacity: "0", zIndex: 2, marginBottom: "-170px", marginLeft: "100px" }} onChange={handleOnChange} />
                                         <div class="pic-holder">
 
@@ -166,12 +164,12 @@ export default function UserProfile() {
 
 
                             <hr />
-                            <div class="row">
-                                <div class="col">
+                            <div class="row justify-content-md-center">
+                                <div class="col-3">
                                     < a href='/dashboard'> <input className='btn btn-secondary btn-user btn-block' value=" Cancel" />
                                     </a>
                                 </div>
-                                <div class="col">
+                                <div class="col-3">
                                     <input type="submit" className='btn btn-primary btn-user btn-block' value="Save Details" />
 
                                 </div>

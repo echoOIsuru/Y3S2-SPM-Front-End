@@ -3,7 +3,7 @@ import { AssignmentTurnedInSharp, GroupOutlined, GroupTwoTone, GroupWork } from 
 import React from 'react'
 import AdminPieChart from '../../Components/UserManagementComponents/AdminPieChart';
 import Table from '../../Components/UserManagementComponents/Table';
-import AdminLineChart from './AdminLineChart';
+import AdminLineChart from '../../Components/UserManagementComponents/AdminLineChart';
 
 
 const Charts =

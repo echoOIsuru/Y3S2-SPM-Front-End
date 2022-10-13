@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
 import {
     AreaChart,
     Area,
@@ -7,10 +8,11 @@ import {
     CartesianGrid,
     Tooltip, Legend
 } from "recharts";
+import UserManagement from '../../Axios/UserManagement';
 
 export default function AdminLineChart() {
 
-    const data = [
+    const [data, setData] = useState([
         {
             name: "February",
             Anesthesiology: 4,
@@ -52,9 +54,67 @@ export default function AdminLineChart() {
             Anesthesiology: 3,
             Dermatology: 4,
             Family_medicine: 2
-        }
-    ];
+        },
 
+    ]);
+
+    useEffect(() => {
+        UserManagement.getUserByDate().then(res => {
+            console.log(res.data, "DATE--")
+            let data = [];
+
+            const today = new Date().getMonth()
+            const oneMonthAgo = new Date().getMonth() - 1
+            let temp = []
+            let a = 0, b = 0, c = 0;
+            let a1 = 0, b1 = 0, c1 = 0;
+
+            res.data.forEach(element => {
+                console.log(today.toString())
+
+                if (element._id.date == today.toString()) {
+                    if (element._id.specialization == "Dermatology")
+                        a += element.value
+                    else if (element._id.specialization == "Family Medicine")
+                        b += element.value
+                    else if (element._id.specialization == "Anesthesiology")
+                        c += element.value
+
+                } else {
+                    if (element._id.specialization == "Dermatology")
+                        a1 += element.value
+                    else if (element._id.specialization == "Family Medicine")
+                        b1 += element.value
+                    else if (element._id.specialization == "Anesthesiology")
+                        c1 += element.value
+
+                }
+
+
+            });
+
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            temp.push(
+                {
+                    name: monthNames[today],
+                    Anesthesiology: c,
+                    Dermatology: a,
+                    Family_medicine: b
+                },
+                {
+                    name: monthNames[oneMonthAgo],
+                    Anesthesiology: c1,
+                    Dermatology: a1,
+                    Family_medicine: b1
+                },
+            )
+            setData(temp)
+            console.log(temp, "FINAL---------------")
+        })
+    }, [])
 
     return (
         <>
@@ -75,6 +135,7 @@ export default function AdminLineChart() {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
+                    <Legend wrapperStyle={{ bottom: 0, right: 0, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
                     <Area
                         type="monotone"
                         dataKey="Anesthesiology"
