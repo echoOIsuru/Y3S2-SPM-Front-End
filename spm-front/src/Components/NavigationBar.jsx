@@ -36,8 +36,8 @@ function NavigationBar() {
                 </li> */}
 
                 {userType == 'admin' && <AdminNavigationComponetnt />}
-                {userType == 'patient' && <>SDSDSDSD</>}
-
+                {userType == 'pharmacist' && <PharmacyNavigationComponetnt />}
+                
 
                 <hr class="sidebar-divider d-none d-md-block" />
 

@@ -59,7 +59,7 @@ function PharmacyNavigationComponetnt() {
 
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/settings">
                     <Settings/>
                     <span>  Setting</span></a>
             </li>

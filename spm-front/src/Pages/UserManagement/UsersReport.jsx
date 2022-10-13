@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminPieChart from '../../Components/UserManagementComponents/AdminPieChart'
-import AdminLineChart from './AdminLineChart'
+import AdminLineChart from '../../Components/UserManagementComponents/AdminLineChart'
 
 export default function UsersReport() {
     return (

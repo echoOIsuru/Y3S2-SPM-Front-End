@@ -79,15 +79,14 @@ export const Setting = () => {
                 <span></span>
             </div>
             <hr class="sidebar-divider" />
-            <div class="row">
-                <div class="row justify-content-md-center" style={{ marginBottom: "140px" }}>
-                    <div className="col-6" style={{ backgroundColor: "white", padding: "50px 80px 80px 80px" }}>
+            <div class="row justify-content-md-center" style={{ marginBottom: "140px" }}>
+                <div class="col-6" >
+                    <br />
+                    <br />
+                    <div className="col" style={{ backgroundColor: "white", padding: "50px 80px 80px 80px" }}>
                         <h5 className='text-center text-gray-800'>RESET PASSWORD</h5>
                         <br />
                         <form onSubmit={updatePassword} class="" >
-
-
-
                             <input type="password" class="form-control form-control-user" name="old_password"
                                 pattern=".{6,}"
                                 title="Six or more characters"
