@@ -11,7 +11,7 @@ const UserManagement = () => {
             </div>
             <hr class="sidebar-divider" />
             <div class="row justify-content-md-center">
-                <div className="col-10">
+                <div className="col-11">
                     <Table />
                     <br />
                 </div>

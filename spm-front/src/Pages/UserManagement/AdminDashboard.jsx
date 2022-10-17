@@ -1,9 +1,11 @@
 
 import { AssignmentTurnedInSharp, GroupOutlined, GroupTwoTone, GroupWork } from '@mui/icons-material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import AdminPieChart from '../../Components/UserManagementComponents/AdminPieChart';
 import Table from '../../Components/UserManagementComponents/Table';
 import AdminLineChart from '../../Components/UserManagementComponents/AdminLineChart';
+import UserManagement from '../../Axios/UserManagement';
+import { useState } from 'react';
 
 
 const Charts =
@@ -38,6 +40,39 @@ const Charts =
 
 
 function AdminDashboard() {
+    const [usersCount, setUsersCount] = useState(0);
+    const [adminCount, setAdminCount] = useState(0);
+    const [monthlyUsers, setMonthlyUsers] = useState(0);
+
+    useEffect(() => {
+        UserManagement.getUserByCount().then(res => {
+            console.log(res.data, "COUNT----------")
+            let tempCount = 0;
+            res.data.forEach(element => {
+                if (element._id == 'admin') {
+
+                    setAdminCount(element.value)
+                }
+                tempCount += element.value
+            });
+
+            setUsersCount(tempCount)
+        })
+
+        const today = new Date().getMonth() + 1
+        let count = 0
+
+        UserManagement.getUserByDate().then(res => {
+            res.data.forEach(e => {
+                if (e._id.date == today) {
+                    count += e.value
+                }
+            })
+            setMonthlyUsers(count)
+        })
+    }, [])
+
+
 
     return (
         <div className='container'>
@@ -111,7 +146,7 @@ function AdminDashboard() {
                         <div className='card-header bg-success'></div>
                         <div className="card-body">
                             <div className='card-title text-success text-center font-weight-bold'>TOTAL USERS</div>
-                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>15</h5>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{usersCount}</h5>
                         </div>
                     </div>
                 </div>
@@ -121,7 +156,7 @@ function AdminDashboard() {
                         <div className='card-header bg-warning'></div>
                         <div className="card-body">
                             <div className='card-title text-warning text-center font-weight-bold'>MONTHLY ACTIVE USERS</div>
-                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>8</h5>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{monthlyUsers}</h5>
                         </div>
                     </div>
                 </div>
@@ -131,7 +166,7 @@ function AdminDashboard() {
                         <div className='card-header bg-info'></div>
                         <div className="card-body">
                             <div className='card-title text-info text-center font-weight-bold'>TOTAL ADMINS</div>
-                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>3</h5>
+                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{adminCount}</h5>
                         </div>
                     </div>
                 </div>

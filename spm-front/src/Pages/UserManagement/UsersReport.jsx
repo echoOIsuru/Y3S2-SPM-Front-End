@@ -1,8 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminPieChart from '../../Components/UserManagementComponents/AdminPieChart'
 import AdminLineChart from '../../Components/UserManagementComponents/AdminLineChart'
+import UserManagement from '../../Axios/UserManagement';
 
 export default function UsersReport() {
+
+    const [usersCount, setUsersCount] = useState(0);
+    const [adminCount, setAdminCount] = useState(0);
+    const [monthlyUsers, setMonthlyUsers] = useState(0);
+
+    useEffect(() => {
+        UserManagement.getUserByCount().then(res => {
+            let tempCount = 0;
+            res.data.forEach(element => {
+                if (element._id == 'admin') {
+                    setAdminCount(element.value)
+                }
+                tempCount += element.value
+            });
+            setUsersCount(tempCount)
+        })
+        const today = new Date().getMonth() + 1
+        let count = 0
+        UserManagement.getUserByDate().then(res => {
+            res.data.forEach(e => {
+                if (e._id.date == today) {
+                    count += e.value
+                }
+            })
+            setMonthlyUsers(count)
+        })
+    }, [])
+
     return (
         <div className='container'>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -34,7 +63,7 @@ export default function UsersReport() {
                                         <div className='card-header bg-success'></div>
                                         <div className="card-body">
                                             <div className='card-title text-success text-center font-weight-bold'>TOTAL USERS</div>
-                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>15</h5>
+                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{usersCount}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +75,7 @@ export default function UsersReport() {
                                         <div className='card-header bg-warning'></div>
                                         <div className="card-body">
                                             <div className='card-title text-warning text-center font-weight-bold'>MONTHLY ACTIVE USERS</div>
-                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>8</h5>
+                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{monthlyUsers}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +87,7 @@ export default function UsersReport() {
                                         <div className='card-header bg-info'></div>
                                         <div className="card-body">
                                             <div className='card-title text-info text-center font-weight-bold'>TOTAL ADMINS</div>
-                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>3</h5>
+                                            <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{adminCount}</h5>
                                         </div>
                                     </div>
                                 </div>
