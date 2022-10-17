@@ -5,6 +5,7 @@ import {
     Area,
     XAxis,
     YAxis,
+    ZAxis,
     CartesianGrid,
     Tooltip, Legend
 } from "recharts";
@@ -70,9 +71,9 @@ export default function AdminLineChart() {
             let a1 = 0, b1 = 0, c1 = 0;
 
             res.data.forEach(element => {
-                console.log(today.toString())
+                console.log((today + 1).toString(), "TODAY----------")
 
-                if (element._id.date == today.toString()) {
+                if (element._id.date == (today + 1).toString()) {
                     if (element._id.specialization == "Dermatology")
                         a += element.value
                     else if (element._id.specialization == "Family Medicine")
@@ -91,7 +92,7 @@ export default function AdminLineChart() {
                 }
 
 
-            });
+            })
 
             const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
@@ -99,17 +100,19 @@ export default function AdminLineChart() {
 
             temp.push(
                 {
-                    name: monthNames[today],
-                    Anesthesiology: c,
-                    Dermatology: a,
-                    Family_medicine: b
-                },
-                {
                     name: monthNames[oneMonthAgo],
                     Anesthesiology: c1,
                     Dermatology: a1,
                     Family_medicine: b1
                 },
+                {
+                    name: monthNames[today],
+                    Anesthesiology: c,
+                    Dermatology: a,
+                    Family_medicine: b
+                },
+
+
             )
             setData(temp)
             console.log(temp, "FINAL---------------")
@@ -133,8 +136,9 @@ export default function AdminLineChart() {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
+                    <YAxis type="number" />
+                    <ZAxis type="number" range={[100]} />
+                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                     <Legend wrapperStyle={{ bottom: 0, right: 0, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
                     <Area
                         type="monotone"
