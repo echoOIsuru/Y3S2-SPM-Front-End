@@ -50,4 +50,18 @@ const addPrescription = (data) => {
     return axios.post(URL + "pm_add_prescription", data);
 }
 
-export default {addStock, getStocks, getStock, updateStock, deleteStock, checkMedicine, addPrescription};
+/**
+ * Get prescriptions
+ */
+const getPrescriptions = () => {
+    return axios.get(URL + "pm_get_prescriptions");
+}
+
+/**
+ * Get prescription's more details
+ */
+const getMoreDetails = (id) => {
+    return axios.get(URL + "pm_get_more_details/" + id);
+}
+
+export default {addStock, getStocks, getStock, updateStock, deleteStock, checkMedicine, addPrescription, getPrescriptions, getMoreDetails};

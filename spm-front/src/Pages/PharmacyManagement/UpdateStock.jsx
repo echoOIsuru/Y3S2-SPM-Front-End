@@ -81,20 +81,17 @@ export default function UpdateStock() {
                                             <label htmlFor="">ID</label>
                                             <input type="text" name="id" value={inputs._id || ""} className="form-control" readOnly />
                                         </div>
-                                        <br />
 
                                         <div className="form-group">
                                             <label htmlFor="">Medicine</label>
                                             <input type="text" name="medicine" value={inputs.medicine} className="form-control" placeholder='Amoxcillin' readOnly />
                                         </div>
-                                        <br />
 
                                         <div className="form-group">
                                             <label htmlFor="">Quantity</label>
                                             <input type="number" name="quantity" value={inputs.quantity} onChange={(e) => { setQty(e.target.value); setInputs(values => ({ ...values, [e.target.name]: e.target.value })) }} className="form-control" placeholder='0' required />
                                             <input type="hidden" onChange={calculateTotal} />
                                         </div>
-                                        <br />
 
                                         <div className="form-group">
                                             <label htmlFor="">Price Per One (Rs)</label>
@@ -108,7 +105,6 @@ export default function UpdateStock() {
                                                 className="form-control" placeholder='0' required />
                                             <input type="hidden" onChange={calculateTotal} />
                                         </div>
-                                        <br />
 
                                         <div>
                                             <label htmlFor="">Expiration Date</label>
