@@ -53,7 +53,7 @@ const ListOngoingAppointments = () => {
 
     //filterByDate
     let filterByDate = OngoingAppointments.slice();
-    filterByDate = filterByDate.filter(item => convertDates(item.date) == convertDates(today));
+    //filterByDate = filterByDate.filter(item => convertDates(item.date) == convertDates(today));
 
     //slice retrieved data for the pagination
     const SlicedOngoingAppointments = filterByDate.slice(indexOfFirstItem, indexOfLastItem);
@@ -92,84 +92,84 @@ const ListOngoingAppointments = () => {
         //         <NavigationBar />
         //     </Col>
         //     <Col>
-                <ThemeProvider breakpoints={['xxxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}>
+        <ThemeProvider breakpoints={['xxxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}>
 
-                    <Container><br /><br />
+            <Container><br /><br />
 
-                        <div class="fontuser" style={{ float: 'right' }}>
+                <center>
+                    <h2 style={{ fontWeight: '700' }}>ONGOING APPOINTMENTS</h2>
+                </center><br /><br />
 
-                            <input className='main-search' placeholder="Search" type="text" name="search" style={{ width: '400px', height: '40px', marginLeft: '100px' }} onChange={(e) => {
-                                handleSearch(e);
-                            }} />
-                            <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
+                <div class="fontuser" style={{ float: 'right' }}>
 
-
-                        </div><br /><br /><br /><br />
-
-                        <center>
-                            <h2 style={{ fontWeight: '700' }}>ONGOING APPOINTMENTS</h2>
-                        </center>
+                    <input className='main-search' placeholder="Search" type="text" name="search" style={{ width: '400px', height: '40px', marginLeft: '100px' }} onChange={(e) => {
+                        handleSearch(e);
+                    }} />
+                    <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
 
 
-                        <Row style={{ marginTop: '50px' }} className='body-content'>
-                            {SlicedOngoingAppointments.length > 0 ?
-                                <Table responsive hover>
+                </div><br /><br />
 
-                                    <thead>
+
+                <Row style={{ marginTop: '50px' }} className='body-content'>
+                    {SlicedOngoingAppointments.length > 0 ?
+                        <Table responsive hover>
+
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Appointment Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    SlicedOngoingAppointments && SlicedOngoingAppointments.map((appoint) => (
                                         <tr>
-                                            <th>Patient Name</th>
-                                            <th>Appointment Date</th>
-                                            <th>Appointment Time</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <td>{appoint.patientName}</td>
+                                            <td>{appoint.date}</td>
+                                            <td>{appoint.time}</td>
+                                            <td>{appoint.status}</td>
+                                            <td>  <Link to={`/appointments/edit/${appoint._id}`} ><FontAwesomeIcon icon={faPenToSquare} /></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <Link hidden={handleHidden(appoint.status)} to={'/medicalDetails'} onClick={() => {
+                                                    const appData = {
+                                                        appID: appoint.AID,
+                                                        appDate: appoint.date,
+                                                        appTime: appoint.time,
+                                                        docId: appoint.doctorID,
+                                                        docName: appoint.doctorName,
+                                                        patientId: appoint.patientNIC,
+                                                        patientName: appoint.patientName
+                                                    }
+                                                    window.sessionStorage.setItem("AppDetails", JSON.stringify(appData))
+                                                    window.sessionStorage.setItem("patientID", appoint.patientNIC);
+                                                }} ><FontAwesomeIcon icon={faArrowRight} /></Link>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            SlicedOngoingAppointments && SlicedOngoingAppointments.map((appoint) => (
-                                                <tr>
-                                                    <td>{appoint.patientName}</td>
-                                                    <td>{appoint.date}</td>
-                                                    <td>{appoint.time}</td>
-                                                    <td>{appoint.status}</td>
-                                                    <td>  <Link to={`/appointments/edit/${appoint._id}`} ><FontAwesomeIcon icon={faPenToSquare} /></Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <Link hidden={handleHidden(appoint.status)} to={'/medicalDetails'} onClick={() => {
-                                                            const appData = {
-                                                                appID: appoint.AID,
-                                                                appDate: appoint.date,
-                                                                appTime: appoint.time,
-                                                                docId: appoint.doctorID,
-                                                                docName: appoint.doctorName,
-                                                                patientId: appoint.patientNIC,
-                                                                patientName: appoint.patientName
-                                                            }
-                                                            window.sessionStorage.setItem("AppDetails", JSON.stringify(appData))
-                                                            window.sessionStorage.setItem("patientID", appoint.patientNIC);
-                                                        }} ><FontAwesomeIcon icon={faArrowRight} /></Link>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        }
+                                    ))
+                                }
 
 
-                                    </tbody>
-                                </Table>
-                                : <span style={{ display: 'flex', justifyContent: 'center' }}>
-                                    Appointments Unavailable !
-                                </span>
-                            }
-                            <Pagination
-                                itemsCount={SlicedOngoingAppointments.length}
-                                itemsPerPage={recordsPerPage}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}
-                                setindexOfLastItem={setindexOfLastItem}
-                                setindexOfFirstItem={setindexOfFirstItem}
-                                alwaysShown={false}
-                            />
-                        </Row>
-                    </Container>
-                </ThemeProvider >
+                            </tbody>
+                        </Table>
+                        : <span style={{ display: 'flex', justifyContent: 'center' }}>
+                            Appointments Unavailable !
+                        </span>
+                    }
+                    <Pagination
+                        itemsCount={SlicedOngoingAppointments.length}
+                        itemsPerPage={recordsPerPage}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        setindexOfLastItem={setindexOfLastItem}
+                        setindexOfFirstItem={setindexOfFirstItem}
+                        alwaysShown={false}
+                    />
+                </Row>
+            </Container>
+        </ThemeProvider >
         //     </Col>
         // </Row>
     )

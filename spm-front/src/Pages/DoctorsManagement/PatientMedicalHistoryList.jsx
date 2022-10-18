@@ -9,6 +9,8 @@ import Pagination from './Pagination';
 import "./admin.css";
 import moment from 'moment'
 import ServiceManagement from '../../Axios/DoctorsManagement'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const ListMedicalHistory = () => {
 
@@ -104,39 +106,76 @@ const ListMedicalHistory = () => {
 
     //delete medicalRecord
     const onDeletemedicalRecord = async (id) => {
-        if (window.confirm('Are you sure, you want to remove the selected Medical Record?')) {
-            try {
-                ServiceManagement.getMedicationRecordById(id).then(res => {
-                    let medicationRecord = res.data;
-                    ServiceManagement.deleteMedicalRecord(id).then(res => {
-                        alert("Selected Medical Record is removed from the system!!");
-                        fetchData();
-                    })
 
-                    ServiceManagement.getCuredPatients().then(res => {
-                        let curedList = res.data;
-                        let filteredData = curedList.slice();
-                        filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == medicationRecord.patient_id.toLowerCase());
-                        filteredData = filteredData.filter(item => item.doctor_id.toLowerCase() == medicationRecord.doctor_id.toLowerCase());
-                        filteredData = filteredData.filter(item => item.illness.toLowerCase() == medicationRecord.illness.toLowerCase());
-                        filteredData = filteredData.filter(item => convertDates(item.first_appointment_date) == convertDates(medicationRecord.appointment_date));
-                        if (filteredData.length == 1) {
-                            ServiceManagement.deleteCuredDetails(filteredData['0']._id);
-                        }
-                    })
-                })
 
-            } catch (error) {
-                alert(error)
-            }
-        }
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure, you want to remove the selected medical record?',
+            buttons: [
+                {
+                    label: 'No',
+                    onClick: () => navigate('/medicalDetails')
+                },
+                {
+                    label: 'Yes',
+                    onClick: () => ServiceManagement.getMedicationRecordById(id)
+                        .then(res => {
+                            let medicationRecord = res.data;
+                            ServiceManagement.deleteMedicalRecord(id).then(res => {
+                                alert("Selected medical record is removed from the system!!");
+                                fetchData();
+                            })
+
+                            ServiceManagement.getCuredPatients().then(res => {
+                                let curedList = res.data;
+                                let filteredData = curedList.slice();
+                                filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == medicationRecord.patient_id.toLowerCase());
+                                filteredData = filteredData.filter(item => item.doctor_id.toLowerCase() == medicationRecord.doctor_id.toLowerCase());
+                                filteredData = filteredData.filter(item => item.illness.toLowerCase() == medicationRecord.illness.toLowerCase());
+                                filteredData = filteredData.filter(item => convertDates(item.first_appointment_date) == convertDates(medicationRecord.appointment_date));
+                                if (filteredData.length == 1) {
+                                    ServiceManagement.deleteCuredDetails(filteredData['0']._id);
+                                }
+                            })
+                        })
+                }
+            ]
+        });
+
+
+        // if (window.confirm('Are you sure, you want to remove the selected medical record?')) {
+        //     try {
+        //         ServiceManagement.getMedicationRecordById(id).then(res => {
+        //             let medicationRecord = res.data;
+        //             ServiceManagement.deleteMedicalRecord(id).then(res => {
+        //                 alert("Selected medical record is removed from the system!!");
+        //                 fetchData();
+        //             })
+
+        //             ServiceManagement.getCuredPatients().then(res => {
+        //                 let curedList = res.data;
+        //                 let filteredData = curedList.slice();
+        //                 filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == medicationRecord.patient_id.toLowerCase());
+        //                 filteredData = filteredData.filter(item => item.doctor_id.toLowerCase() == medicationRecord.doctor_id.toLowerCase());
+        //                 filteredData = filteredData.filter(item => item.illness.toLowerCase() == medicationRecord.illness.toLowerCase());
+        //                 filteredData = filteredData.filter(item => convertDates(item.first_appointment_date) == convertDates(medicationRecord.appointment_date));
+        //                 if (filteredData.length == 1) {
+        //                     ServiceManagement.deleteCuredDetails(filteredData['0']._id);
+        //                 }
+        //             })
+        //         })
+
+        //     } catch (error) {
+        //         alert(error)
+        //     }
+        // }
     }
 
-    const getLength = async() => {
+    const getLength = async () => {
 
-        try{
-        const result = await axios.get("http://localhost:8090/api/v1/curedPatients");
-        console.log('jj11', result.data)
+        try {
+            const result = await axios.get("http://localhost:8090/api/v1/curedPatients");
+            console.log('jj11', result.data)
             let patientID = sessionStorage.getItem("patientID");
             let filteredData = result.data.slice();
             filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == patientID.toLowerCase());
@@ -150,32 +189,36 @@ const ListMedicalHistory = () => {
                 return false;
             }
         }
-        catch(err){
+        catch (err) {
             alert(err);
         }
     }
 
-    function checkRecords()  {
+    function checkRecords() {
 
         console.log('jj11', curedList)
-            let patientID = sessionStorage.getItem("patientID");
-            let filteredData = curedList.slice();
-            filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == patientID.toLowerCase());
-            filteredData = filteredData.filter(item => item.doctor_id.toLowerCase() == loggedDocId.toLowerCase());
-            filteredData = filteredData.filter(item => item.cured.toLowerCase() == 'false');
-            if (filteredData.length > 0) {
-                console.log('ll', filteredData.length)
-                return false;
-            }
-            else {
-                return true;
-            }
+        let patientID = sessionStorage.getItem("patientID");
+        let filteredData = curedList.slice();
+        filteredData = filteredData.filter(item => item.patient_id.toLowerCase() == patientID.toLowerCase());
+        filteredData = filteredData.filter(item => item.doctor_id.toLowerCase() == loggedDocId.toLowerCase());
+        filteredData = filteredData.filter(item => item.cured.toLowerCase() == 'false');
+        if (filteredData.length > 0) {
+            console.log('ll', filteredData.length)
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     return (
         <ThemeProvider breakpoints={['xxxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}>
 
             <Container><br /><br />
+
+                <center>
+                    <h2 style={{ fontWeight: '700' }}>PATIENT MEDICAL HISTORY</h2>
+                </center><br /><br /><br />
 
                 <div class="fontuser" style={{ float: 'right' }}>
 
@@ -185,15 +228,12 @@ const ListMedicalHistory = () => {
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
 
 
-                </div><br /><br /><br /><br />
+                </div><br /><br />
 
-                <center>
-                    <h2 style={{ fontWeight: '700' }}>PATIENT MEDICAL HISTORY</h2>
-                </center><br /><br />
 
                 <Row className="list-title">
                     <Col>
-                        <h5 style={{ marginTop: '10px', fontWeight: '500', fontSize: '17px', marginLeft:'18px' }}>Patient Name: {patientName}</h5>
+                        <h5 style={{ marginTop: '10px', fontWeight: '500', fontSize: '17px', marginLeft: '18px' }}>Patient Name: {patientName}</h5>
                     </Col>
                     <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <Link style={{ marginRight: '10px' }} className='btn btn-outline-primary' to={("/medication/create")}>Add New Record</Link>

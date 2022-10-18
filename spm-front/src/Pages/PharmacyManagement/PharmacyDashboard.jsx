@@ -103,6 +103,8 @@ export default function PharmacyDashboard() {
     ],
   };
 
+  console.log('xccc', data)
+
   return (
     <div>
       <div className="container">

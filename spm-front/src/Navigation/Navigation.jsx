@@ -18,6 +18,9 @@ import AddStock from '../Pages/PharmacyManagement/AddStock';
 import UpdateStock from '../Pages/PharmacyManagement/UpdateStock';
 import ViewStocks from '../Pages/PharmacyManagement/ViewStocks';
 import PharmacyDashboard from '../Pages/PharmacyManagement/PharmacyDashboard';
+import DoctorReports from '../Pages/DoctorsManagement/DoctorReports';
+import CuredList from '../Pages/DoctorsManagement/CuredPatientsList';
+import AppointementsList from './../Pages/DoctorsManagement/AppointementsList';
 
 function Navigation() {
     return (
@@ -37,6 +40,9 @@ function Navigation() {
                 <Route path='/medication/create' element={<Container data={<ManageMedications />}/>} />
                 <Route path='/medication/edit/:id' element={<Container data={<ManageMedications />} />}/>
                 <Route path='/healthStatus/edit' element={<Container data={<EditHealthStatus />} />}/>
+                <Route path='/view/doctorReports' element={<Container data={<DoctorReports />} />}/>
+                <Route path='/view/curedPatients' element={<Container data={<CuredList />} />}/>
+                <Route path='/view/appointementsList' element={<Container data={<AppointementsList />} />}/>
             {/* </Route> */}
 
         </Routes>

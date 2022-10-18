@@ -81,7 +81,7 @@ const EditHealthStatus = () => {
         }
     }
 
-    function check() {
+    const check = () => {
         if (Cured == "true") {
             document.getElementById("curedID").checked = true;
         }
