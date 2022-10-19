@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -10,8 +10,30 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import PharmacyManagement from '../../Axios/PharmacyManagement';
 
 export default function BarChart() {
+
+    const [medicine, setMedicine] = useState([]);
+    const [quantity, setQuantity] = useState([]);
+
+    useEffect(() => {
+        PharmacyManagement.getMedicines()
+            .then((data) => {
+
+                let med = [];
+                let qty = [];
+
+                data.data.forEach((i) => {
+                    med.push(i.medicine);
+                    qty.push(i.quantity);
+                })
+
+                setMedicine(med);
+                setQuantity(qty);
+
+            })
+    },[])
 
     ChartJS.register(
         CategoryScale,
@@ -40,14 +62,14 @@ export default function BarChart() {
             },
         },
     };
-    const labels = ['Amoxicillin', 'Meloxicam', 'Gabapentin', 'Entyvio', 'Metoprolol', 'Clindamycin', 'Pantoprazole'];
+    const labels = medicine;
 
     const data = {
         labels,
         datasets: [
             {
                 label: '',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: quantity,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 159, 64, 0.2)',

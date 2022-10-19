@@ -13,7 +13,7 @@ export default function AddPrescription() {
     const [subTotal, setSubTotal] = useState(0);
 
     const current = new Date();
-    const added_date = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`;
+    const added_date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
     const handleSubmit = (event) => {
         event.preventDefault();
