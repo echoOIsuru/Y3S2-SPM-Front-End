@@ -4,12 +4,6 @@ import PrescriptionsTable from '../../Components/PharmacyManagementComponents/Pr
 
 export default function PharmacyDashboard() {
 
-  useEffect(()=>{
-    let data = []
-    sessionStorage.setItem("TOTAL_BILL", JSON.stringify(data))
-
-  },[])
-
   return (
     <div>
       <div className="container">
@@ -31,7 +25,7 @@ export default function PharmacyDashboard() {
         <div className='row'>
 
           <div className='col'>
-            <div className='card shadow'>
+            <div className='card shadow text-center'>
               <div className='card-header bg-secondary text-white font-weight-bold text-gray-800'>RECENT PRESCRIPTIONS</div>
               <div className='card-body'>
 

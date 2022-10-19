@@ -13,7 +13,7 @@ export default function AddPrescription() {
     const [subTotal, setSubTotal] = useState(0);
 
     const current = new Date();
-    const added_date = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`;
+    const added_date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -119,7 +119,7 @@ export default function AddPrescription() {
                                     {/* <div className='col-xl-8'> */}
 
                                         <div className="form-group">
-                                            <label htmlFor="">Patient ID</label>
+                                            <label htmlFor="">Patient's appointment ID</label>
                                             <input type="text" name="id" value={inputs.id} onChange={(e) => { setInputs(values => ({ ...values, [e.target.name]: e.target.value })) }} className="form-control" required />
                                         </div>
                                         <br />

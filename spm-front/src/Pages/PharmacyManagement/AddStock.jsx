@@ -11,7 +11,7 @@ export default function AddStock() {
     const [price, setPrice] = useState(0);
 
     const current = new Date();
-    const added_date = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`;
+    const added_date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
     const navigate = useNavigate();
 

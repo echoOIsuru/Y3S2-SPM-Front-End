@@ -176,28 +176,3 @@ export default function ViewStocks() {
         </div>
     )
 }
-
-
-
-{/* <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Medicine</th>
-            <th>Added Date</th>
-            <th>Quantity</th>
-            <th>Cost</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>101</td>
-            <td>Amoxcillin</td>
-            <td>11 aug 2022</td>
-            <td>1000</td>
-            <td>5000 /=</td>
-            <td>icons</td>
-        </tr>
-    </tbody>
-</table> */}

@@ -21,7 +21,7 @@ export default function ViewPrescriptions() {
                     </div>
                     <hr class="sidebar-divider" />
                     <div className="row">
-                        <div className="card shadow col-md-10 offset-md-1 offset-md-1">
+                        <div className="card shadow text-center col-md-10 offset-md-1 offset-md-1">
                             <br />
                             <div className="card-body">
                                 <form className='mx-auto'>
