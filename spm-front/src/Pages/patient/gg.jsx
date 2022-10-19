@@ -78,7 +78,7 @@ useEffect(() => {
       <ul className="navbar-nav">
      &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;  &nbsp;
         <li className="nav-item">
-          <a className="nav-link active" href="/">Home</a>
+          <a className="nav-link active"href="/patient-home">Home</a>
         </li>  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;&nbsp;  
         <li className="nav-item">
           <a className="nav-link"  href="/appointments/">APPOINTMENT DETAILS</a>
