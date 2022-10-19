@@ -29,6 +29,8 @@ function Login() {
                     navigation('/dashboard')
                 if (res.data.userType == 'pharmacist')
                     navigation('/pharmacy/pharmacy_dashboard')
+                if (res.data.userType == 'patient')
+                    navigation('/patient-home')
             }
         })
     }
