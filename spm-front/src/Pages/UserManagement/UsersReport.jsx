@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import AdminPieChart from '../../Components/UserManagementComponents/AdminPieChart'
 import AdminLineChart from '../../Components/UserManagementComponents/AdminLineChart'
 import UserManagement from '../../Axios/UserManagement';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 export default function UsersReport() {
 
     const [usersCount, setUsersCount] = useState(0);
     const [adminCount, setAdminCount] = useState(0);
     const [monthlyUsers, setMonthlyUsers] = useState(0);
+    const printRef = useRef();
 
     useEffect(() => {
         UserManagement.getUserByCount().then(res => {
@@ -32,15 +35,31 @@ export default function UsersReport() {
         })
     }, [])
 
+    const handleDownloadPdf = async () => {
+        const element = printRef.current;
+        const canvas = await html2canvas(element);
+        const data = canvas.toDataURL('image/png');
+
+        const pdf = new jsPDF();
+        const imgProperties = pdf.getImageProperties(data);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight =
+            (imgProperties.height * pdfWidth) / imgProperties.width;
+
+        pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('User_Management_Report.pdf');
+    };
+
     return (
-        <div className='container'>
+        <div className='container' ref={printRef}>
+            <br />
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <span></span>
                 <h1 class="h3 mb-0 text-gray-800">REPORTS</h1>
                 <span></span>
             </div>
             <hr class="sidebar-divider" />
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center" >
                 <div className="col-9">
                     <div className="row">
                         <div class="col">
@@ -112,18 +131,19 @@ export default function UsersReport() {
                         </div>
                     </div>
                     <hr />
-
-                    <p align="right">
-                        <button className='btn btn-primary btn-user' style={{ align: "" }}>
-                            Generate Report
-                        </button>
-                    </p>
-
                 </div>
 
-
-
-
+            </div>
+            <div className='container'>
+                <div class="row justify-content-md-center" >
+                    <div className="col-9">
+                        <p align="right">
+                            <button className='btn btn-primary btn-user' style={{ align: "" }} onClick={handleDownloadPdf}>
+                                Generate Report
+                            </button>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     )
