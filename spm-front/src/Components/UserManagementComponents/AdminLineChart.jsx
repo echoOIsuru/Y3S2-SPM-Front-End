@@ -13,51 +13,7 @@ import UserManagement from '../../Axios/UserManagement';
 
 export default function AdminLineChart() {
 
-    const [data, setData] = useState([
-        {
-            name: "February",
-            Anesthesiology: 4,
-            Dermatology: 2,
-            Family_medicine: 2
-        },
-        {
-            name: "March",
-            Anesthesiology: 3,
-            Dermatology: 9,
-            Family_medicine: 2
-        },
-        {
-            name: "April",
-            Anesthesiology: 2,
-            Dermatology: 9,
-            Family_medicine: 2
-        },
-        {
-            name: "May",
-            Anesthesiology: 2,
-            Dermatology: 3,
-            Family_medicine: 2
-        },
-        {
-            name: "June",
-            Anesthesiology: 1,
-            Dermatology: 4,
-            Family_medicine: 2
-        },
-        {
-            name: "July",
-            Anesthesiology: 2,
-            Dermatology: 3,
-            Family_medicine: 2
-        },
-        {
-            name: "August",
-            Anesthesiology: 3,
-            Dermatology: 4,
-            Family_medicine: 2
-        },
-
-    ]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         UserManagement.getUserByDate().then(res => {

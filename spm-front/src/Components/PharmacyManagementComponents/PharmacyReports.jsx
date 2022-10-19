@@ -34,7 +34,7 @@ export default function PharmacyReports() {
 
   }, [])
 
-  
+
 
 
   return (
@@ -86,7 +86,7 @@ export default function PharmacyReports() {
           <BarChart />
         </div>
 
-        <div className='col'>
+        <div className='col-xl-4'>
           <DoughnutChart />
         </div>
 
