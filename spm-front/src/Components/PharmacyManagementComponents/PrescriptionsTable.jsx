@@ -1,36 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
+import { useNavigate } from 'react-router-dom';
+import PharmacyManagement from '../../Axios/PharmacyManagement';
 
 export default function PrescriptionsTable() {
 
-    const products = [
-        { id: '123', firstName: 'Jeffrey', lastName: 'George', added_date: '2022-07-09', total_bill: '1750' },
-        { id: '063', firstName: 'Alvis', lastName: 'Daen', added_date: '2022-03-17', total_bill: '1200' },
-        { id: '100', firstName: 'Lissa', lastName: 'Shipsey', added_date: '2022-05-10', total_bill: '1600' },
-        { id: '111', firstName: 'Marcos', lastName: 'Anguiano', added_date: '2022-04-21', total_bill: '2150' },
-    ];
+    const navigate = useNavigate();
+    const [prescriptions, setPrescriptions] = useState([]);
+
+    useEffect(() => {
+        PharmacyManagement.getPrescriptions()
+            .then(res => {
+                setPrescriptions(res.data)
+            })
+    },[])
+
+    const moreDetails = (id) => {
+        sessionStorage.setItem('DATA_ID', id);
+        navigate('/pharmacy/more_details');
+    }
 
     const GetActionFormat = (cell, row) => {
         return (
             <div>
-                <button type="button" className="btn btn-outline-primary btn-sm ts-buttom" size="sm" >
-                    Details
+                <button type="button" className="btn btn-outline-primary btn-sm ts-buttom" size="sm" onClick={() => moreDetails(row._id)} >
+                    View
                 </button>
             </div>
         );
     }
 
     const columns = [
-        { dataField: 'id', text: 'User ID', sort: true },
-        { dataField: 'firstName', text: 'First Name', sort: true },
-        { dataField: 'lastName', text: 'Last Name', sort: true },
+        { dataField: 'id', text: 'Appointment ID', sort: true },
+        { dataField: 'name', text: 'Patient Name', sort: true },
         { dataField: 'added_date', text: 'Date', sort: true },
         { dataField: 'total_bill', text: 'Total Bill', sort: true },
-        { dataField: 'action', text: 'Action',  formatter: GetActionFormat }
+        { dataField: 'action', text: 'More Details',  formatter: GetActionFormat }
     ];
 
     const defaultSorted = [{
@@ -64,8 +73,8 @@ export default function PrescriptionsTable() {
 
             <ToolkitProvider
                 bootstrap4
-                keyField='id'
-                data={products}
+                keyField='_id'
+                data={prescriptions}
                 columns={columns}
                 search
             >
@@ -81,6 +90,8 @@ export default function PrescriptionsTable() {
                                 defaultSorted={defaultSorted}
                                 pagination={pagination}
                                 {...props.baseProps}
+                                hover
+                                bordered={false}
                             />
                         </div>
                     )

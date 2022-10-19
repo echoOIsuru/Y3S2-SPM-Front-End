@@ -4,9 +4,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const useAuth = () => {
     try {
-        //let data = sessionStorage.getItem('userLoginStorage');
-        // data = JSON.parse(data);
-        let data = { _id: "gg" }
+        let data = sessionStorage.getItem('userLoginStorage');
+        data = JSON.parse(data);
+        //let data = { _id: "gg" }
 
         if (data._id) {
             const user = { loggedIn: true }

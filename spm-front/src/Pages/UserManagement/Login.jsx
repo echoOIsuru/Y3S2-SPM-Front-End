@@ -1,6 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import UserManagement from '../../Axios/UserManagement'
 
 function Login() {
+    const [inputs, setInputs] = useState({});
+
+    const navigation = useNavigate();
+
+    const inputHandler = (event) => {
+        let name = event.target.name;
+        let value = event.target.value;
+
+        setInputs(values => ({ ...values, [name]: value }))
+    }
+
+    const logUser = (e) => {
+        e.preventDefault()
+
+        console.log(inputs, "asdasd")
+
+        UserManagement.loginUser(inputs).then(res => {
+            if (res.data == []) {
+                window.alert(`User account does not exist. Please try again!`)
+            } else {
+                console.log(res.data)
+                sessionStorage.setItem("userLoginStorage", JSON.stringify(res.data));
+                if (res.data.userType == 'admin')
+                    navigation('/dashboard')
+                if (res.data.userType == 'pharmacist')
+                    navigation('/pharmacy/pharmacy_dashboard')
+                if (res.data.userType == 'patient')
+                    navigation('/patient-home')
+                if (res.data.userType == 'doctor')
+                    navigation('/onGoingAppointments')
+            }
+        })
+    }
+
+
+
     return (
         <div>
             <body>
@@ -30,16 +68,15 @@ function Login() {
                                                 <br />
 
 
-                                                <form class="user">
+                                                <form class="user" onSubmit={logUser}>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control form-control-user"
-                                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                                            placeholder="Enter Email Address" />
+                                                        <input type="email" class="form-control form-control-user" name='email' onChange={inputHandler}
+                                                            placeholder="Enter Email Address" required />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <input type="password" class="form-control form-control-user"
-                                                            id="exampleInputPassword" placeholder="Enter Password" />
+                                                        <input type="password" class="form-control form-control-user" name='password' onChange={inputHandler}
+                                                            placeholder="Enter Password" required />
                                                     </div>
                                                     {/* <div class="form-group">
                                                         <div class="custom-control custom-checkbox small">
@@ -50,15 +87,14 @@ function Login() {
                                                     </div> */}
                                                     <br />
                                                     <br />
-                                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                                        Login
-                                                    </a>
+                                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Login" />
+
 
                                                 </form>
                                                 <hr />
 
                                                 <div class="text-center">
-                                                    <a class="small" href="register.html">Create an Account!</a>
+                                                    <a class="small" href="/register">Create an Account!</a>
                                                 </div>
                                             </div>
                                         </div>

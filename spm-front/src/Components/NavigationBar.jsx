@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavigationComponetnt from './AdminNavigationComponetnt';
 import PharmacyNavigationComponetnt from './PharmacyNavigationComponent';
-import DoctorNavigation from '../Pages/DoctorsManagement/DoctorNavigationBar';
+import DoctorNavigation from './DoctorNavigationBar';
 
 function NavigationBar() {
     let [userType, setUserType] = useState();
 
     useEffect(() => {
-        setUserType("A")
+        let data = sessionStorage.getItem('userLoginStorage');
+        data = JSON.parse(data);
+
+        setUserType(data.userType)
     }, [])
 
 
@@ -33,9 +36,10 @@ function NavigationBar() {
                         <span>Dashboard</span></a>
                 </li> */}
 
-                {/* <PharmacyNavigationComponetnt/> */}
-                <DoctorNavigation />
-
+                {userType == 'admin' && <AdminNavigationComponetnt />}
+                {userType == 'pharmacist' && <PharmacyNavigationComponetnt />}
+                {userType == 'doctor' && <DoctorNavigation />}
+                
 
                 <hr class="sidebar-divider d-none d-md-block" />
 

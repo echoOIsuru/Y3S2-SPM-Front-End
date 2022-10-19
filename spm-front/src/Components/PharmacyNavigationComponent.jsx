@@ -10,7 +10,7 @@ function PharmacyNavigationComponetnt() {
                 Main
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/dashboard">
+                <a class="nav-link collapsed" href="/pharmacy/pharmacy_dashboard">
                     <House/>
                     <span>     Dashboard</span>
                 </a>
@@ -18,7 +18,7 @@ function PharmacyNavigationComponetnt() {
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/pharmacy/reports">
                     <AnalyticsRounded/>
                     <span>  Reports</span>
                 </a>
@@ -30,28 +30,28 @@ function PharmacyNavigationComponetnt() {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/pharmacy/add_prescription">
                     <AddCard/>
                     <span>  Add Prescrptions</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/pharmacy/add_stock">
                     <AddToPhotos/>
                     <span>  Add Stocks</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/pharmacy/view_prescriptions">
                     <Assessment/>
                     <span>  View Prescrptions</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="/pharmacy/view_stocks">
                     <Article/>
                     <span>  View Stocks</span>
                 </a>
@@ -59,7 +59,7 @@ function PharmacyNavigationComponetnt() {
 
 
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="/settings">
                     <Settings/>
                     <span>  Setting</span></a>
             </li>
