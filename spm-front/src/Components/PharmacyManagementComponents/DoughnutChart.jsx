@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import PharmacyManagement from '../../Axios/PharmacyManagement';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export default function DoughnutChart() {
 
@@ -72,7 +73,8 @@ export default function DoughnutChart() {
         ArcElement,
         Title,
         Tooltip,
-        Legend
+        Legend,
+        ChartDataLabels
     );
 
     /**
