@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavigationComponetnt from './AdminNavigationComponetnt';
 import PharmacyNavigationComponetnt from './PharmacyNavigationComponent';
+import DoctorNavigation from './DoctorNavigationBar';
 
 function NavigationBar() {
     let [userType, setUserType] = useState();
@@ -37,6 +38,7 @@ function NavigationBar() {
 
                 {userType == 'admin' && <AdminNavigationComponetnt />}
                 {userType == 'pharmacist' && <PharmacyNavigationComponetnt />}
+                {userType == 'doctor' && <DoctorNavigation />}
                 
 
                 <hr class="sidebar-divider d-none d-md-block" />

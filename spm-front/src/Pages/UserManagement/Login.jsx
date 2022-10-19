@@ -31,6 +31,8 @@ function Login() {
                     navigation('/pharmacy/pharmacy_dashboard')
                 if (res.data.userType == 'patient')
                     navigation('/patient-home')
+                if (res.data.userType == 'doctor')
+                    navigation('/onGoingAppointments')
             }
         })
     }
