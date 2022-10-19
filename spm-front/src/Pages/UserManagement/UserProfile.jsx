@@ -166,7 +166,7 @@ export default function UserProfile() {
                             <hr />
                             <div class="row justify-content-md-center">
                                 <div class="col-3">
-                                    < a href='/dashboard'> <input className='btn btn-secondary btn-user btn-block' value=" Cancel" />
+                                    < a href='#'> <input className='btn btn-secondary btn-user btn-block' value=" Cancel" />
                                     </a>
                                 </div>
                                 <div class="col-3">

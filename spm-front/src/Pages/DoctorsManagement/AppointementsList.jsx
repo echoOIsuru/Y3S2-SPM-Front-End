@@ -26,8 +26,8 @@ const AppointementsList = () => {
     //fetch details of allocated panels
     const fetchData = useCallback(async () => {
         try {
-            //let data = sessionStorage.getItem('key');
-            ServiceManagement.getAppointmentsByDocId('kevin').then(res => {
+            let data = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+            ServiceManagement.getAppointmentsByDocId(data.email).then(res => {
                 console.log(res.data)
                 setOngoingAppointments(res.data)
                 setretrievedData(res.data)

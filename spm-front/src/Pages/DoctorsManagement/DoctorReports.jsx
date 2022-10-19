@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,6 +16,8 @@ import { ThemeProvider, Container, Table, Row, Col, Button } from "react-bootstr
 import { Cpu } from 'react-bootstrap-icons';
 import ServiceManagement from '../../Axios/DoctorsManagement'
 import moment from 'moment'
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import DoctorPieChart from './DoctorPieChart';
 
 export default function DoctorReports() {
 
@@ -47,7 +49,8 @@ export default function DoctorReports() {
                 console.log(res.data)
                 //filterByDoc
                 let filterByDoctor = res.data.slice();
-                filterByDoctor = filterByDoctor.filter(item => item.doctor_id == 'kevin');
+                let data = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+                filterByDoctor = filterByDoctor.filter(item => item.doctor_id == data.email);
 
                 let filterByCured = filterByDoctor.slice();
                 filterByCured = filterByCured.filter(item => item.cured == 'true');
@@ -87,7 +90,9 @@ export default function DoctorReports() {
                 setpiechartData(retrievedData);
             })
 
-            ServiceManagement.getAppointmentsByDocId('kevin').then(res => {
+            let data = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+
+            ServiceManagement.getAppointmentsByDocId(data.email).then(res => {
                 setTotalAppointments(res.data.length)
 
                 let filterByAccepted = res.data.slice();
@@ -103,7 +108,7 @@ export default function DoctorReports() {
                 setRejectedAppointments(rejectedPercentage);
                 //bar chart dynamic data
 
-                let January = 0; let February = 0; let  March = 0; let  April = 0; let May = 0; let June = 0; let July = 0; let August = 0; let September = 0; let October = 0; let November = 0; let December = 0;
+                let January = 0; let February = 0; let March = 0; let April = 0; let May = 0; let June = 0; let July = 0; let August = 0; let September = 0; let October = 0; let November = 0; let December = 0;
                 for (let i = 0; i < filterByAccepted.length; i++) {
                     let appointmentDate = new Date(convertDates(filterByAccepted[i].date));
                     let monthofAppointement = (appointmentDate.getMonth()) + 1;
@@ -128,7 +133,7 @@ export default function DoctorReports() {
                         setmayTotal(May);
                     }
                     else if (monthofAppointement == 6) {
-                        June  = June + 1;
+                        June = June + 1;
                         setjuneTotal(June);
                     }
                     else if (monthofAppointement == 7) {
@@ -140,7 +145,7 @@ export default function DoctorReports() {
                         setaugestTotal(August);
                     }
                     else if (monthofAppointement == 9) {
-                        console.log('loopjj',septTotal)
+                        console.log('loopjj', septTotal)
                         September = September + 1;
                         setseptTotal(September);
                     }
@@ -208,7 +213,6 @@ export default function DoctorReports() {
     };
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    console.log('month length',septTotal,januaryTotal)
     const data = {
         labels,
         datasets: [
@@ -293,161 +297,149 @@ export default function DoctorReports() {
         ],
     };
 
+    const pdfExportComponent = useRef(null);
+
     const generateReport = () => {
 
-        window.print();
+        pdfExportComponent.current.save();
 
     }
 
     return (
         <div>
+
             <div className="container">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <span></span>
-                    <h1 class="h3 mb-0 text-gray-800">REPORTS</h1>
-                    <span></span>
-                </div>
-                <hr class="sidebar-divider" />
-
-                {/* three cards */}
-
-                <Row>
-
-                    <Col>
-                        <div className="card shadow">
-                            <div className='card-header bg-success'></div>
-                            <div className="card-body">
-                                <div className='card-title text-success text-center font-weight-bold'>TOTAL APPOINTMENTS</div>
-                                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{totalAppointments}</h5>
-                            </div>
+                <PDFExport fileName='Doctor_Activity_Management_Report' ref={pdfExportComponent}>
+                    <>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <span></span>
+                            <h1 class="h3 mb-0 text-gray-800">REPORTS</h1>
+                            <span></span>
                         </div>
-                    </Col>
+                        <hr class="sidebar-divider" />
 
-                    <Col>
-                        <div className="card shadow">
-                            <div className='card-header bg-warning'></div>
-                            <div className="card-body">
-                                <div className='card-title text-warning text-center font-weight-bold'>ACCEPTED APPOINTMENTS</div>
-                                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{acceptedAppointments}</h5>
-                            </div>
-                        </div>
-                    </Col>
+                        {/* three cards */}
 
-                    <Col>
-                        <div className="card shadow">
-                            <div className='card-header bg-info'></div>
-                            <div className="card-body">
-                                <div className='card-title text-info text-center font-weight-bold'>REJECTED APPOINTMENTS</div>
-                                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{rejectedAppointments}</h5>
-                            </div>
-                        </div>
-                    </Col>
+                        <Row>
 
-                </Row>
-                <br />
-
-                <Row>
-
-                    <Col>
-                        <div className="card shadow">
-                            <div className='card-header bg-secondary'></div>
-                            <div className="card-body">
-                                <div className='card-title text-secondary text-center font-weight-bold'>CURED PATIENTS </div>
-                                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{curedPatients}</h5>
-                            </div>
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div className="card shadow">
-                            <div className='card-header bg-primary'></div>
-                            <div className="card-body">
-                                <div className='card-title text-primary text-center font-weight-bold'>PATIENTS UNDER MEDICATION</div>
-                                <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{notCured}</h5>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col />
-
-                </Row>
-                <br /><br /><br /><br />
-
-                {/* charts */}
-
-                <Row>
-                    <Col xs={'auto'} />
-                    <center>
-                        <Col xs={7}>
-                            <div className='card shadow'>
-                                <div className='card-header bg-light font-weight-bold text-gray-800 text-center'>MONTHLY TOTAL PATIENTS </div>
-                                <div className='card-body'>
-
-                                    <Bar options={options} data={data} />
-
-                                </div>
-
-                            </div>
-                        </Col>
-                    </center>
-                    <Col xs={'auto'} />
-                </Row>
-
-                <br /><br /><br /><br />
-
-                {/* piechart */}
-                <Row>
-                    <Col xs={'auto'} />
-                    <center>
-                        <Col xs={6}>
-
-                            <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 style={{ textAlign: 'center' }} class="m-0 font-weight-bold text-primary"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TIME FOR PATIENTS TO RECOVER FROM ILLNESSES</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
+                            <Col>
+                                <div className="card shadow">
+                                    <div className='card-header bg-success'></div>
+                                    <div className="card-body">
+                                        <div className='card-title text-success text-center font-weight-bold'>TOTAL APPOINTMENTS</div>
+                                        <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{totalAppointments}</h5>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <PieChart width={400} height={380} style={{ marginTop: "-59px" }}>
-                                        <Pie
-                                            data={piechartData}
-                                            cx={200}
-                                            cy={200}
-                                            labelLine={false}
-                                            label={renderCustomizedLabel}
-                                            outerRadius={130}
-                                            fill="#8884d8"
-                                            dataKey="value"
-                                            nameKey="name"
-                                        >
-                                            {piechartData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                            ))}
-                                        </Pie>
-                                    </PieChart>
+                            </Col>
 
-
+                            <Col>
+                                <div className="card shadow">
+                                    <div className='card-header bg-warning'></div>
+                                    <div className="card-body">
+                                        <div className='card-title text-warning text-center font-weight-bold'>ACCEPTED APPOINTMENTS</div>
+                                        <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{acceptedAppointments}</h5>
+                                    </div>
                                 </div>
-                            </div>
+                            </Col>
 
-                        </Col>
-                    </center>
-                    <Col xs={'auto'} />
-                </Row>
+                            <Col>
+                                <div className="card shadow">
+                                    <div className='card-header bg-info'></div>
+                                    <div className="card-body">
+                                        <div className='card-title text-info text-center font-weight-bold'>REJECTED APPOINTMENTS</div>
+                                        <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{rejectedAppointments}</h5>
+                                    </div>
+                                </div>
+                            </Col>
 
-                <button className="btn btn-success" style={{ marginLeft: 600, width: "8%", textAlign: 'center', color: 'white' }} onClick={() => {generateReport()}}>Print</button>
+                        </Row>
+                        <br />
+
+                        <Row>
+
+                            <Col>
+                                <div className="card shadow">
+                                    <div className='card-header bg-secondary'></div>
+                                    <div className="card-body">
+                                        <div className='card-title text-secondary text-center font-weight-bold'>CURED PATIENTS </div>
+                                        <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{curedPatients}</h5>
+                                    </div>
+                                </div>
+                            </Col>
+
+                            <Col>
+                                <div className="card shadow">
+                                    <div className='card-header bg-primary'></div>
+                                    <div className="card-body">
+                                        <div className='card-title text-primary text-center font-weight-bold'>PATIENTS UNDER MEDICATION</div>
+                                        <h5 className='h5 mb-0 font-weight-bold text-gray-800 text-center'>{notCured}</h5>
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col />
+
+                        </Row>
+                        <br /><br /><br /><br />
+
+                        {/* charts */}
+
+                        <Row>
+                            <Col xs={'auto'} />
+                            <center>
+                                <Col xs={7}>
+                                    <div className='card shadow'>
+                                        <div className='card-header bg-light font-weight-bold text-gray-800 text-center'>MONTHLY TOTAL PATIENTS </div>
+                                        <div className='card-body'>
+
+                                            <Bar options={options} data={data} />
+
+                                        </div>
+
+                                    </div>
+                                </Col>
+                            </center>
+                            <Col xs={'auto'} />
+                        </Row>
+
+                        <br /><br /><br /><br />
+
+                        {/* piechart */}
+                        <Row>
+                            <Col xs={'auto'} />
+                            <center>
+                                <Col xs={6}>
+
+                                    <div class="card shadow mb-4">
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 style={{ textAlign: 'center' }} class="m-0 font-weight-bold text-primary"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TIME FOR PATIENTS TO RECOVER FROM ILLNESSES</h6>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                    aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <DoctorPieChart />
+                                        </div>
+                                    </div>
+
+                                </Col>
+                            </center>
+                            <Col xs={'auto'} />
+                        </Row>
+                    </>
+                </PDFExport>
+                <button className="btn btn-success" style={{ marginLeft: 600, width: "8%", textAlign: 'center', color: 'white' }} onClick={() => { generateReport() }}>Print</button>
 
                 <br /><br /><br /><br />
 
