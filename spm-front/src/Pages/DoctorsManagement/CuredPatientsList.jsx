@@ -30,7 +30,8 @@ const CuredList = () => {
                 console.log(res.data)
                 //filterByDoc
                 let filterByDoctor = res.data.slice();
-                filterByDoctor = filterByDoctor.filter(item => item.doctor_id == 'kevin');
+                let data = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+                filterByDoctor = filterByDoctor.filter(item => item.doctor_id == data.email);
 
                 let filterByCured = filterByDoctor.slice();
                 filterByCured = filterByCured.filter(item => item.cured == 'true');

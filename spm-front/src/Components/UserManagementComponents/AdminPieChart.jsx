@@ -39,6 +39,7 @@ export default function AdminPieChart() {
                 else if (element._id == "pharmacist")
                     temp.push({ name: "Pharmacists", value: parseFloat((element.value / total * 100).toFixed(2)) })
             });
+            console.log('dataPrecentage',temp)
             setPieData(temp)
         })
     }, [])

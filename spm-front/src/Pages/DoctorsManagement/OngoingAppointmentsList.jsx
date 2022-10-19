@@ -26,8 +26,8 @@ const ListOngoingAppointments = () => {
     //fetch details of allocated panels
     const fetchData = useCallback(async () => {
         try {
-            //let data = sessionStorage.getItem('key');
-            ServiceManagement.getAppointmentsByDocId('kevin').then(res => {
+            let data = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+            ServiceManagement.getAppointmentsByDocId(data.email).then(res => {
                 console.log(res.data)
                 setOngoingAppointments(res.data)
                 setretrievedData(res.data)
@@ -52,8 +52,10 @@ const ListOngoingAppointments = () => {
     }
 
     //filterByDate
+    console.log('dateBefore',OngoingAppointments)
     let filterByDate = OngoingAppointments.slice();
-    //filterByDate = filterByDate.filter(item => convertDates(item.date) == convertDates(today));
+    filterByDate = filterByDate.filter(item => convertDates(item.date) == convertDates(today));
+    console.log('dateAfter',filterByDate)
 
     //slice retrieved data for the pagination
     const SlicedOngoingAppointments = filterByDate.slice(indexOfFirstItem, indexOfLastItem);

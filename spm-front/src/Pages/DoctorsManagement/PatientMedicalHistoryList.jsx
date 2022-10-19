@@ -30,9 +30,8 @@ const ListMedicalHistory = () => {
     //fetch details of allocated panels
     const fetchData = useCallback(async () => {
         try {
-            // let doctorID = sessionStorage.getItem('key');
-            // setloggedDocId(doctorID);
-            setloggedDocId('kevin');
+            let doctorID = JSON.parse(sessionStorage.getItem("userLoginStorage"))
+            setloggedDocId(doctorID.email);
             let patientID = sessionStorage.getItem("patientID");
             let passedData = window.sessionStorage.getItem("AppDetails");
             passedData = JSON.parse(passedData);
