@@ -16,8 +16,8 @@ const ListOngoingAppointments = () => {
     const [OngoingAppointments, setOngoingAppointments] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [indexOfFirstItem, setindexOfFirstItem] = useState(0);
-    const [indexOfLastItem, setindexOfLastItem] = useState(3);
-    const [recordsPerPage] = useState(3);
+    const [indexOfLastItem, setindexOfLastItem] = useState(5);
+    const [recordsPerPage] = useState(5);
     const [retrievedData, setretrievedData] = useState([])
 
     let today = new Date().toLocaleDateString();
@@ -55,7 +55,7 @@ const ListOngoingAppointments = () => {
     console.log('dateBefore',OngoingAppointments)
     let filterByDate = OngoingAppointments.slice();
     filterByDate = filterByDate.filter(item => convertDates(item.date) == convertDates(today));
-    console.log('dateAfter',filterByDate)
+
 
     //slice retrieved data for the pagination
     const SlicedOngoingAppointments = filterByDate.slice(indexOfFirstItem, indexOfLastItem);
@@ -161,7 +161,7 @@ const ListOngoingAppointments = () => {
                         </span>
                     }
                     <Pagination
-                        itemsCount={SlicedOngoingAppointments.length}
+                        itemsCount={filterByDate.length}
                         itemsPerPage={recordsPerPage}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
