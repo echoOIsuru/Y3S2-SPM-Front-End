@@ -122,7 +122,7 @@ const CuredList = () => {
                         </span>
                     }
                     <Pagination
-                        itemsCount={SlicedCuredList.length}
+                        itemsCount={CuredList.length}
                         itemsPerPage={recordsPerPage}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
