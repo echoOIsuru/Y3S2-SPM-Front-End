@@ -140,7 +140,7 @@ const AppointementsList = () => {
                         </span>
                     }
                     <Pagination
-                        itemsCount={SlicedOngoingAppointments.length}
+                        itemsCount={OngoingAppointments.length}
                         itemsPerPage={recordsPerPage}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
