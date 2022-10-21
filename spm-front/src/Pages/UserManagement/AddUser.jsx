@@ -55,7 +55,7 @@ export default function AddUser() {
             UserManagement.addNewUser(temp).then(res => {
                 console.log(res.data)
                 window.alert(`User ${temp.firstName} created successfully!`)
-                //navigation('/')
+                window.location.reload();
             })
 
         }
@@ -171,8 +171,7 @@ export default function AddUser() {
                         <hr />
                         <div class="row">
                             <div class="col">
-                                < a href='/dashboard'> <input className='btn btn-secondary btn-user btn-block' value=" Cancel" />
-                                </a>
+                                <button className='btn btn-secondary btn-user btn-block' onClick={() => { window.location.reload(); }}>Cancel</button>
                             </div>
                             <div class="col">
                                 <input type="submit" className='btn btn-primary btn-user btn-block' value=" Add User" />

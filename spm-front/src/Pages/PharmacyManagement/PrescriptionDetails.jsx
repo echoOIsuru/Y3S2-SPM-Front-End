@@ -37,8 +37,11 @@ export default function PrescriptionDetails() {
             <br />
             <div className="card-body">
               <form>
+
+
                 <div className='row'>
-                  <div className='col-xl-4'>
+                  <div className='col-xl-12'>
+
                     <div className="form-group">
                       <label htmlFor="">Appointment ID</label>
                       <input type="text" name="id" value={info.id || ""} className="form-control" readOnly />
@@ -53,13 +56,11 @@ export default function PrescriptionDetails() {
                       <label htmlFor="">Date</label>
                       <input type="text" name="date" value={info.added_date} className="form-control" readOnly />
                     </div>
-                  </div>
-                  {/* <div className='col'></div>
+
+                    {/* <div className='col'></div>
                   <div className='col'></div> */}
 
-                </div>
-
-                <div className='row'>
+                  </div>
                   <div className='col-xl-8'>
                     <div className='container'>
                       <div className='card text-center'>

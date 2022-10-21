@@ -8,6 +8,7 @@ import {
 import { Delete, Edit } from '@mui/icons-material';
 import { useEffect } from "react";
 import UserManagement from "../../Axios/UserManagement";
+import { confirmAlert } from 'react-confirm-alert';
 function Table() {
     const [data, setData] = useState([])
     const [tableData, setTableData] = useState([]);
@@ -20,7 +21,6 @@ function Table() {
         "Moneragala", "Ratnapura", "Kegalle"
     ]
     const [validationErrors, setValidationErrors] = useState({});
-
     useEffect(() => {
         let temp = []
         UserManagement.getAllUsers().then(res => {
@@ -165,6 +165,34 @@ function Table() {
 
     const handleDeleteRow = useCallback(
         (row) => {
+
+            // confirmAlert({
+            //     title: 'Confirm to delete',
+            //     message: `Do you want to delete ${row.getValue('email')}`,
+            //     buttons: [
+            //         {
+            //             label: 'No',
+            //             onClick: () => { }
+            //         },
+            //         {
+            //             label: 'Yes',
+            //             onClick: () => {
+            //                 UserManagement.deleteUser(row.original._id).then(res => {
+            //                     console.log(res.data, 'deleted');
+            //                     console.log(row.original, "ROW DATA")
+            //                     //send api delete request here, then refetch or update local table data for re-render
+            //                     tableData.splice(row.index, 1);
+            //                     setTableData([...tableData]);
+            //                 }).catch(e => {
+            //                     console.log(e, "error");
+            //                 })
+
+
+            //             }
+            //         }
+            //     ]
+            // });
+
             if (!window.confirm(`Are you sure you want to delete ${row.getValue('email')}`)) {
                 return;
             }

@@ -51,6 +51,7 @@ export default function UserProfile() {
             window.alert(`User ${temp.firstName} updated successfully!`)
             sessionStorage.setItem("userLoginStorage", JSON.stringify(inputs))
             //navigation('/')
+            window.location.reload();
         }).catch(e => {
 
             console.log(e, "error")
@@ -166,8 +167,8 @@ export default function UserProfile() {
                             <hr />
                             <div class="row justify-content-md-center">
                                 <div class="col-3">
-                                    < a href='/dashboard'> <input className='btn btn-secondary btn-user btn-block' value=" Cancel" />
-                                    </a>
+                                    <button className='btn btn-secondary btn-user btn-block' onClick={() => { window.location.reload(); }}>Cancel</button>
+
                                 </div>
                                 <div class="col-3">
                                     <input type="submit" className='btn btn-primary btn-user btn-block' value="Save Details" />
